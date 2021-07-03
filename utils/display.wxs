@@ -1,0 +1,114 @@
+/**获取给定字符串中，某个分隔符前的部分 */
+var getBeforeSeperatorPart = function (value, seperator = ' ') {
+  if (value) {
+    var arr = value.split(seperator);
+    return arr[0];
+  } else {
+    return '';
+  }
+}
+
+/**获取给定字符串中，某个分隔符后的部分 */
+var getAfterSeperatorPart = function (value, seperator = ' ') {
+  if (value) {
+    var arr = value.split(seperator);
+    if (arr.length > 1) {
+      return arr[1];
+    } else {
+      return '';
+    }
+  } else {
+    return '';
+  }
+}
+
+/**
+ * 获取被分隔符分隔的各个部分的数组
+ * @param value 
+ * @param seperator 
+ */
+var getPartsWithSeperator = function (value, seperator = ' ') {
+  if (value) {
+    var arr = value.split(seperator);
+    return arr;
+  } else {
+    return '';
+  }
+}
+
+/**
+ * 用固定的小数位数进行格式化金融费用
+ * @param value 待格式的金融费用值
+ * @param decimalLength 小数位数的长度，缺省为2
+ */
+var formatFee = function (value, decimalLength = 2) {
+  return Number(value).toFixed(decimalLength);
+}
+
+/**
+ * 将数据库内以“分”为单位的货币转换为“元”为单位，进行展示
+ * @param value 
+ */
+var formatFeeCent= function(value){  
+  value= Number(value);
+  value= value/ 100;
+  if(isNaN(value)){
+    return "";
+  }else{
+    return formatFee(value,2)+"元";
+  }  
+}
+
+var getColorName = function (index) {
+  var colorName = "";
+  switch (index) {
+    case 0:
+      colorName = "red";
+      break;
+    case 1:
+      colorName = "orange";
+      break;
+    case 2:
+      colorName = "yellow";
+      break;
+    default:
+      colorName = "gray";
+      break;
+  }
+  return colorName;
+}
+
+var getSubString = function (whole, length, positive = true) {  
+  var realLength = whole.length;
+  var result = "";
+  if (length >= realLength) {
+    result = whole;
+  } else {
+    if (positive == true) {
+      result = whole.substring(0, length);
+    } else {
+      result = whole.substring(realLength - length, realLength);
+    }
+  }
+  return result;
+}
+
+/**
+ * 反转字符串前后顺序
+ * @param data 
+ */
+var reverseString = function (data) {
+  return data.split("").reverse().join("");
+}
+
+
+module.exports = {
+  getBeforeSeperatorPart: getBeforeSeperatorPart,
+  getAfterSeperatorPart: getAfterSeperatorPart,
+  getPartsWithSeperator: getPartsWithSeperator,
+  getColorName: getColorName,
+  formatFee: formatFee,
+  formatFeeCent:formatFeeCent,
+  getSubString: getSubString,
+  reverseString: reverseString,
+};
