@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模拟键按下</title>
+    <script src="../jQuery/jquery-3.6.0.js"></script>
+    <script src="../jQuery-Plugin/jQuery.SimulateKeyPress.js"></script>
+</head>
+<body>
+<input type="button" value="模拟键按下" id="btnSimulate1"/>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //0、接受键盘键按下信息
+        $(document).keypress(function (e){
+            let keyName= String.fromCharCode(e.which);
+            alert(`模拟按下的键位${keyName},其键值为 ${e.which}`)
+        });
+
+        //1、触发模拟按下键盘键
+        $("#btnSimulate1").on("click",function (){
+            $(document).simulateKeyPress('a');
+        });
+    });
+</script>
+</body>
+</html>

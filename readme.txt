@@ -1,0 +1,6 @@
+0、本项目使用WebStorm打开进行编辑
+1、utils内的文件是在各种类型的应用中均可以使用的功能
+2、jQuery-Plugin是jQuery的插件库，仅Web类型的项目可用
+3、miniApp是微信等职能小程序可以使用的功能
+
+9、Pages是测试页面
