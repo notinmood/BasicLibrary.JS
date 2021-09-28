@@ -15,34 +15,34 @@ let watchingKeys = [];
  * XXX.watch("temp", someFunc, getApp().globalData.a);
  */
 function watch(keyName, callbackFunc, targetDataSet = null) {
-  if (targetDataSet == null) {
-    targetDataSet = getApp().globalData;
-  }
+    if (targetDataSet == null) {
+        targetDataSet = getApp().globalData;
+    }
 
-  watchCallBack = Object.assign({}, watchCallBack, {
-    [keyName]: watchCallBack[keyName] || []
-  });
-  watchCallBack[keyName].push(callbackFunc);
-  if (!watchingKeys.find(x => x === keyName)) {
-    //const that = this;
-    watchingKeys.push(keyName);
-    let val = targetDataSet[keyName];
-    Object.defineProperty(targetDataSet, keyName, {
-      configurable: true,
-      enumerable: true,
-      set(value) {
-        const old = targetDataSet[keyName];
-        val = value;
-        watchCallBack[keyName].map(func => func(value, old));
-      },
-      get() {
-        return val
-      }
-    })
-  }
+    watchCallBack = Object.assign({}, watchCallBack, {
+        [keyName]: watchCallBack[keyName] || []
+    });
+    watchCallBack[keyName].push(callbackFunc);
+    if (!watchingKeys.find(x => x === keyName)) {
+        //const that = this;
+        watchingKeys.push(keyName);
+        let val = targetDataSet[keyName];
+        Object.defineProperty(targetDataSet, keyName, {
+            configurable: true,
+            enumerable: true,
+            set(value) {
+                const old = targetDataSet[keyName];
+                val = value;
+                watchCallBack[keyName].map(func => func(value, old));
+            },
+            get() {
+                return val
+            }
+        })
+    }
 }
 
 
 module.exports = {
-  watch,
+    watch,
 };

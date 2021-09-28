@@ -159,11 +159,11 @@ function requestCommonApiGet(caller, funcName, funcParam, moreParams, callbackfu
  * @param {*} funcName 服务器函数方法名称
  * @param {*} funcParam 服务器函数方法后面括号内的参数，统一放在用此参数管理，多个参数的值用^^分隔，仅仅传递参数值（不用传递参数名称）
  * @param {*} moreParams 参数数组。如果是方法内通过input等形式接受的其他参数，使用moreParams[参数名]=参数值 的方法传递
- * @param {*} callbackfuncs 可以是一个方法（success对应的方法）；也可以是一个方法数组，数组内的3个元素分别为successFunc、failFunc、completeFunc
+ * @param {*} callbackFuncs 可以是一个方法（success对应的方法）；也可以是一个方法数组，数组内的3个元素分别为successFunc、failFunc、completeFunc
  * @param {*} showLoading 是否显示“正在加载。。。”的遮罩层提示框
  */
-function requestCommonApiPost(caller, funcName, funcParam, moreParams, callbackfuncs, className = 'Biz', showLoading = true, returnJson = true) {
-  _requestCommonApi(caller, funcName, funcParam, moreParams, "POST", callbackfuncs, className, showLoading, returnJson);
+function requestCommonApiPost(caller, funcName, funcParam, moreParams, callbackFuncs, className = 'Biz', showLoading = true, returnJson = true) {
+  _requestCommonApi(caller, funcName, funcParam, moreParams, "POST", callbackFuncs, className, showLoading, returnJson);
 }
 
 

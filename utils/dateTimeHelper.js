@@ -1,6 +1,6 @@
 //字符串转日期格式，dateString要转为日期格式的字符串
 function getDate(dateString = "") {
-    var date = null;
+    let date = null;
 
     if (dateString) {
         date = new Date(dateString);
@@ -48,7 +48,7 @@ function format(date = null, formatter = "") {
         "s+": date.getSeconds().toString() // 秒
         // 有其他格式化字符需求可以继续添加，必须转化成字符串
     };
-    for (var k in opt) {
+    for (let k in opt) {
         ret = new RegExp("(" + k + ")").exec(formatter);
         if (ret) {
             formatter = formatter.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
@@ -72,9 +72,9 @@ function isSameDay(timeStampA, timeStampB) {
 function isSameWeek(timeStampA, timeStampB) {
     let A = new Date(timeStampA).setHours(0, 0, 0, 0);
     let B = new Date(timeStampB).setHours(0, 0, 0, 0);
-    var oneDayTime = 1000 * 60 * 60 * 24;
-    var old_count = parseInt(A / oneDayTime);
-    var now_other = parseInt(B / oneDayTime);
+    let oneDayTime = 1000 * 60 * 60 * 24;
+    let old_count = parseInt(A / oneDayTime);
+    let now_other = parseInt(B / oneDayTime);
     if (parseInt((old_count + 4) / 7) == parseInt((now_other + 4) / 7)) {
         return true;
     } else {

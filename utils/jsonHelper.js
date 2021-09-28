@@ -17,7 +17,7 @@ function isJson(str) {
 function parse(str) {
     if (typeof str == 'string') {
         try {
-            var obj = JSON.parse(str);
+            let obj = JSON.parse(str);
             if (typeof obj == 'object' && obj) {
                 return obj;
             } else {

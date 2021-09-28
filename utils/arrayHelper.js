@@ -1,4 +1,4 @@
-function isExist(arrayData, item) {
+function hasMember(arrayData, item) {
     if (item in arrayData) {
         return true;
     } else {
@@ -19,28 +19,14 @@ function sortObjectPropertyValue(arrayData, propName, sortOrder = "ASC") {
 
 function _sortObjectPropertyValue(propName, sortOrder = "ASC") {
     return function (obj1, obj2) {
-        var val1 = obj1[propName];
-        var val2 = obj2[propName];
+        let val1 = obj1[propName];
+        let val2 = obj2[propName];
         if (!isNaN(Number(val1)) && !isNaN(Number(val2))) {
             val1 = Number(val1);
             val2 = Number(val2);
         }
 
-        var reuslt = 0;
-        if (val1 < val2) {
-            reuslt = -1;
-        } else if (val1 > val2) {
-            reuslt = 1;
-        } else {
-            reuslt = 0;
-        }
-
-        sortOrder = sortOrder.toLowerCase();
-        if (sortOrder == "desc") {
-            reuslt = 0 - reuslt;
-        }
-
-        return reuslt;
+        return _sortTwoValue(val1,val2,sortOrder);
     }
 }
 
@@ -57,25 +43,29 @@ function sortObjectPropertyLength(arrayData, propName, sortOrder = "ASC") {
 
 function _sortObjectPropertyLength(propName, sortOrder = "ASC") {
     return function (obj1, obj2) {
-        var val1 = obj1[propName].toString().length;
-        var val2 = obj2[propName].toString().length;
+        let val1 = obj1[propName].toString().length;
+        let val2 = obj2[propName].toString().length;
 
-        var reuslt = 0;
-        if (val1 < val2) {
-            reuslt = -1;
-        } else if (val1 > val2) {
-            reuslt = 1;
-        } else {
-            reuslt = 0;
-        }
-
-        sortOrder = sortOrder.toLowerCase();
-        if (sortOrder == "desc") {
-            reuslt = 0 - reuslt;
-        }
-
-        return reuslt;
+        return _sortTwoValue(val1,val2,sortOrder);
     }
+}
+
+function _sortTwoValue(val1,val2, sortOrder = "ASC"){
+    let result = 0;
+    if (val1 < val2) {
+        result = -1;
+    } else if (val1 > val2) {
+        result = 1;
+    } else {
+        result = 0;
+    }
+
+    sortOrder = sortOrder.toLowerCase();
+    if (sortOrder == "desc") {
+        result = 0 - result;
+    }
+
+    return result;
 }
 
 /**
@@ -92,12 +82,12 @@ function _sortObjectPropertyLength(propName, sortOrder = "ASC") {
  */
 function mergeElementProperty(mainArray, secondaryArray) {
     let mainCount = (mainArray).length;
-    let sencondaryCount = (secondaryArray).length;
+    let secondaryCount = (secondaryArray).length;
   
     let result = [];
     for (let i = 0; i < mainCount; i++) {
       let item = null;
-      let index = i % sencondaryCount;
+      let index = i % secondaryCount;
       item = Object.assign(mainArray[i], secondaryArray[index]);
       result.push(item);
     }
@@ -106,7 +96,7 @@ function mergeElementProperty(mainArray, secondaryArray) {
   }
 
 module.exports = {
-    isExist,
+    hasMember,
     sortObjectPropertyValue,
     sortObjectPropertyLength,
     mergeElementProperty,

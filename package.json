@@ -1,0 +1,12 @@
+{
+  "name": "BasiceLibary.JavaScript",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^9.1.2"
+  }
+}

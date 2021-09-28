@@ -6,8 +6,8 @@ params就是其他的额外参数，比如我有一个方法是test(options, nam
 
  @example
     const promisify = require('./utils/promisify.js')   
-    const wxlogin = promisify(wx.login)
-    wxlogin().then(res => {
+    const wxLogin = promisify(wx.login)
+    wxLogin().then(res => {
       console.log(res);
     });
 

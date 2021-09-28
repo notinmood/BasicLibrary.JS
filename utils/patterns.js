@@ -1,5 +1,5 @@
 // 观察者
-var observer = {
+let observer = {
   // 订阅集合
   subscribes: [],
 
@@ -15,7 +15,7 @@ var observer = {
 
   // 发布  可能会携带一些信息发布出去
   publish: function() {
-      var type = [].shift.call(arguments),
+      let type = [].shift.call(arguments),
           fns = this.subscribes[type];
       
       // 不存在的订阅类型，以及订阅时未传入处理回调的
@@ -24,7 +24,7 @@ var observer = {
       }
       
       // 挨个处理调用
-      for (var i = 0; i < fns.length; ++i) {
+      for (let i = 0; i < fns.length; ++i) {
           fns[i].apply(this, arguments);
       }
   },
@@ -37,7 +37,7 @@ var observer = {
           return;
       }
 
-      var fns = this.subscribes[type];
+      let fns = this.subscribes[type];
 
       // 不存在的订阅类型，以及订阅时未传入处理回调的
       if (!fns || !fns.length) {
@@ -50,7 +50,7 @@ var observer = {
       }
 
       // 挨个处理删除
-      for (var i = 0; i < fns.length; ++i) {
+      for (let i = 0; i < fns.length; ++i) {
           if (fns[i] === fn) {
               fns.splice(i, 1);
           }
