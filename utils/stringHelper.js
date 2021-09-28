@@ -181,6 +181,21 @@ function isNumber(strData) {
     return /^[-]?[\.\d]+$/.test(strData);
 }
 
+/**
+ * 获取count倍的stringData
+ * @param stringData
+ * @param count
+ * @returns {string}
+ */
+function multi(stringData, count) {
+    let padding = "";
+    for (let i = 0; i < count; i++) {
+        padding += stringData;
+    }
+
+    return padding;
+}
+
 module.exports = {
     format,
     explode,
@@ -193,6 +208,8 @@ module.exports = {
 
     toLower,
     toUpper,
+
+    multi,
 
     getStringAfterSeparator,
     getStringBeforeSeparator,

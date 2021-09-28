@@ -1,17 +1,4 @@
-// 获取小数点后两位
-function getResultWithTwoFloat(value) {
-    value = Math.round(parseFloat(value) * 100) / 100;
-    let xsd = value.toString().split(".");
-    if (xsd.length == 1) {
-        value = value.toString() + ".00";
-        return value;
-    } else if (xsd.length > 1) {
-        if (xsd[1].length < 2) {
-            value = value.toString() + "0";
-        }
-        return value;
-    }
-}
+
 
 /**
  * 获取Array,string等对象中元素的个数
@@ -70,40 +57,7 @@ async function sleepWrap(msTime, callbackFunc, ...args) {
     callbackFunc(...args);
 }
 
-/**
- * 获取uuid字符串
- * @param {*} len uuid的长度，默认为0表示获取标准长度的uuid
- * @param {*} radix uuid组成的字符的进制格式，默认为16表示标准的格式
- */
-function uuid(len = 0, radix = 16) {
-    let chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
-    let uuid = [],
-        i;
-    radix = radix || chars.length;
 
-    if (len) {
-        // Compact form
-        for (i = 0; i < len; i++) uuid[i] = chars[0 | Math.random() * radix];
-    } else {
-        // rfc4122, version 4 form
-        let r;
-
-        // rfc4122 requires these characters
-        uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-';
-        uuid[14] = '4';
-
-        // Fill in random data.  At i==19 set the high bits of clock sequence as
-        // per rfc4122, sec. 4.1.5
-        for (i = 0; i < 36; i++) {
-            if (!uuid[i]) {
-                r = 0 | Math.random() * 16;
-                uuid[i] = chars[(i == 19) ? (r & 0x3) | 0x8 : r];
-            }
-        }
-    }
-
-    return uuid.join('');
-}
 
 /**
  * 获取在前台wxml文件中，要传递给后台js方法的参数
@@ -248,194 +202,30 @@ function genTreeData(sourceData, idFieldName, parentIdFieldName, childrenNodeNam
 }
 
 
-/**
- * 獲取对象的成员信息。如果指定的成员名称不存在，则返回defaultValue。
- * @param {*} targetObject
- * @param {*} memberName 成员的名称，如果是某个对象子对象的成员，则可以使用“A.B.C”的格式。
- * @param {*} defaultValue
- * @example:
- * 如下有对象moo
- * moo: {
-    m0: 'mike',
-    m1: {},
-    m2: {
-      n1: {
-        o: 'hello',
-        p: function (s) {
-          return 1 + s;
-        }
-      }
-    },
-  }
-
- 调用时候：
- //调用直接moo的属性
- let p = app.util.getObjectMemberSafely(this.moo, "m0");
- console.log(p);
- //调用moo的子属性对象的属性
- p = app.util.getObjectMemberSafely(this.moo, "m2.n1.o", "something");
- console.log(p);
- //调用moo的子属性对象的方法
- p = app.util.getObjectMemberSafely(this.moo, "m2.n1.p");
- console.log(p(5));
- //调用moo的不存在的属性，返回的结果为第三个参数
- //（缺省值i am empty。如果不给指定明确的缺省值，那么返回null作为缺省值）
- p = app.util.getObjectMemberSafely(this.moo, "m2.n1.w", "i am empty");
- console.log(p);
- */
-function getObjectMemberSafely(targetObject, memberName, defaultValue = null) {
-    let nodes = memberName.split(".");
-    let nodeCount = nodes.length;
-    let lastNode = targetObject;
-
-    for (let i = 0; i < nodeCount; i++) {
-        if (lastNode == null) {
-            break;
-        }
-
-        lastNode = _getObjectMemberInner(lastNode, nodes[i], defaultValue);
-    }
-
-    return lastNode;
-}
-
-function _getObjectMemberInner(targetObject, propertyName, defaultValue = null) {
-    let exist = isObjectMember(targetObject, propertyName);
-    if (exist) {
-        return targetObject[propertyName];
-    } else {
-        return defaultValue;
-    }
-}
-
-/**
- * 判断某个对象是否拥有某个成员
- */
-function isObjectMember(targetObject, memberName) {
-    if (isExist(targetObject) && isExist(memberName)) {
-        if (targetObject[memberName] == undefined) {
-            return false;
-        } else {
-            return true;
-        }
-    } else {
-        return false;
-    }
-}
+//
+// /**
+//  * 判断某个对象是否拥有某个成员
+//  */
+// function isObjectMember(targetObject, memberName) {
+//     if (isExist(targetObject) && isExist(memberName)) {
+//         if (targetObject[memberName] == undefined) {
+//             return false;
+//         } else {
+//             return true;
+//         }
+//     } else {
+//         return false;
+//     }
+// }
 
 
-let ObjectTypeNames = {
-    "null": "null",
-    "string": "string",
-    "date": "date",
-    "boolean": "boolean",
-    "undefined": "undefined",
-    "function": "function",
-    "number": "number",
-    "array": "array",
-    "symbol": "symbol",
-    "error": "error",
-    "regexp": "regexp",
-    "object": "object",
-}
 
-function getTypeName(data) {
-    let typeName = null;
-    typeName = typeof (data)
-    if (typeName == "object") {
-        let typeObject = Object.prototype.toString.call(data);
-
-        switch (typeObject) {
-            case "[object Null]":
-                typeName = ObjectTypeNames.null;
-                break;
-            case "[object Array]":
-                typeName = ObjectTypeNames.array;
-                break;
-            case "[object Date]":
-                typeName = ObjectTypeNames.date;
-                break;
-            case "[object RegExp]":
-                typeName = ObjectTypeNames.regexp;
-                break;
-            case "[object Error]":
-                typeName = ObjectTypeNames.error;
-                break;
-            default:
-                typeName = ObjectTypeNames.object;
-        }
-    }
-
-    return typeName;
-}
-
-/**
- * 从服务端返回的带格式的数据
- * 属性{bool}resultType 表示反回信息的真或者假
- * 属性{string}title返回信息的主题信息
- * 属性{string}desc返回信息的内容信息
- * 属性{object}misc返回信息的各种其他信息，这是一个自定义对象可以任意扩展其子属性信息
- */
-class ReturnsObject {
-    constructor(resultType = true, title = '', desc = '', misc = null) {
-        this.resultType = resultType;
-        this.title = title;
-        this.desc = desc;
-        if (misc == null) {
-            misc = {};
-        }
-        this.misc = misc;
-    }
-
-    /**
-     * 设定属性misc的各个子属性
-     * @param {*} name
-     * @param {*} value
-     */
-    setMiscItem(name, value) {
-        this.misc[name] = value;
-    }
-
-    /**
-     * 获取misc的各个子属性的值
-     * @param {*} name
-     * @param {*} defaultValue
-     */
-    getMiscItem(name, defaultValue = null) {
-        return getObjectMemberSafely(this.misc, name, defaultValue);
-    }
-}
-
-/**
- * 解析服务器返回信息为本地类型ReturnsObject的对象
- * @param {*} data 服务器返回的json格式字符串或者json对象
- */
-function parseReturnsObject(data) {
-    let typeInfo = getTypeName(data);
-    if (typeInfo == ObjectTypeNames.string) {
-        data = JSON.parse(data);
-        typeInfo = getTypeName(data);
-    }
-
-    let result = null;
-    if (typeInfo == ObjectTypeNames.object) {
-        let resultType = getObjectMemberSafely(data, 'resultType', true);
-        let title = getObjectMemberSafely(data, 'title', '');
-        let desc = getObjectMemberSafely(data, 'desc', '');
-        let misc = getObjectMemberSafely(data, 'misc', null);
-
-        result = new ReturnsObject(resultType, title, desc, misc);
-    }
-
-    return result;
-}
 
 module.exports = {
     getBindFuncData,
     getBindEventData,
     getInputtingValue,
 
-    uuid,
     sleep,
     sleepWrap,
     getResultWithTwoFloat,
@@ -443,13 +233,8 @@ module.exports = {
     isEmpty,
     isExist,
 
-    isObjectMember,
-    getObjectMemberSafely,
 
     getLength,
-
-    getTypeName,
-    ObjectTypeNames,
 
     genTreeData,
 

@@ -1,74 +1,32 @@
-const ot = require("./objectTypes");
-
-let ObjectTypes = {
-    "Null": "null",
-    "String": "string",
-    "Date": "date",
-    "Boolean": "boolean",
-    "Undefined": "undefined",
-    "Function": "function",
-    "Number": "number",
-    "Array": "array",
-    "Symbol": "symbol",
-    "Error": "error",
-    "Regexp": "regexp",
-    "Object": "object",
-}
-
-/**
- * 判断数据的数据类型
- * @param data
- * @returns {string}
- */
-let getType = function (data) {
-    const objectType = typeof (data);
-
-    /**
-     * 对undefined类型要先判断
-     */
-    if (objectType == "undefined") {
-        return ot.ObjectTypes.Undefined;
-    }
-
-
-    if (data == null) {
-        return ot.ObjectTypes.Null;
-    }
-
-
-    if (objectType == "object") {
-        if (data instanceof Array) {
-            return ot.ObjectTypes.Array;
-        }
-
-        if (data instanceof Date) {
-            return ot.ObjectTypes.DateTime;
-        }
-    }
-
-    switch (objectType) {
-        case "number":
-            return ot.ObjectTypes.Number;
-        case "symbol":
-            return ot.ObjectTypes.Symbol;
-        case "boolean":
-            return ot.ObjectTypes.Boolean;
-        case "string":
-            return ot.ObjectTypes.String;
-        case "function":
-            return ot.ObjectTypes.Function;
-        default:
-            return ot.ObjectTypes.Object;
-    }
-}
-
 /**
  * 判断一个对象内是否存在某成员
  * @param objectData 目标对象实例
- * @param memberName 成员名称
+ * @param memberName 成员名称(如果是某个对象子对象的成员，则可以使用“A.B.C”的格式。)
  * @returns {boolean}
  */
 let hasMember = function (objectData, memberName) {
+    let nodes = memberName.split(".");
+    let nodeCount = nodes.length;
+    let lastNode = objectData;
+
+    let defaultValue = "_hasMember_|_defaultValue_";
+    for (let i = 0; i < nodeCount; i++) {
+        if (lastNode == null) {
+            break;
+        }
+
+        lastNode = _getMemberInner(lastNode, nodes[i], defaultValue);
+    }
+
+
+    if (lastNode == defaultValue) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+let _hasMemberInner = function (objectData, memberName) {
     if (memberName in objectData) {
         return true;
     } else {
@@ -76,7 +34,68 @@ let hasMember = function (objectData, memberName) {
     }
 }
 
+
+/**
+ * 獲取对象的成员信息。如果指定的成员名称不存在，则返回defaultValue。
+ * @param {*} targetObject
+ * @param {*} memberName 成员的名称(如果是某个对象子对象的成员，则可以使用“A.B.C”的格式。)
+ * @param {*} defaultValue
+ * @example:
+ * 如下有对象moo
+ moo= {
+    m0: 'mike',
+    m1: {},
+    m2: {
+      n1: {
+        o: 'hello',
+        p: function (s) {
+          return 1 + s;
+        }
+      }
+    },
+  }
+
+ 调用时候：
+ //调用直接moo的属性
+ let p = app.util.getObjectMemberSafely(this.moo, "m0");
+ console.log(p);
+ //调用moo的子属性对象的属性
+ p = app.util.getObjectMemberSafely(this.moo, "m2.n1.o", "something");
+ console.log(p);
+ //调用moo的子属性对象的方法
+ p = app.util.getObjectMemberSafely(this.moo, "m2.n1.p");
+ console.log(p(5));
+ //调用moo的不存在的属性，返回的结果为第三个参数
+ //（缺省值i am empty。如果不给指定明确的缺省值，那么返回null作为缺省值）
+ p = app.util.getObjectMemberSafely(this.moo, "m2.n1.w", "i am empty");
+ console.log(p);
+ */
+function getMember(targetObject, memberName, defaultValue = null) {
+    let nodes = memberName.split(".");
+    let nodeCount = nodes.length;
+    let lastNode = targetObject;
+
+    for (let i = 0; i < nodeCount; i++) {
+        if (lastNode == null) {
+            break;
+        }
+
+        lastNode = _getMemberInner(lastNode, nodes[i], defaultValue);
+    }
+
+    return lastNode;
+}
+
+function _getMemberInner(targetObject, propertyName, defaultValue = null) {
+    let exist = _hasMemberInner(targetObject, propertyName);
+    if (exist) {
+        return targetObject[propertyName];
+    } else {
+        return defaultValue;
+    }
+}
+
 module.exports = {
-    getType,
     hasMember,
+    getMember,
 }

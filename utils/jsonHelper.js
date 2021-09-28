@@ -1,8 +1,10 @@
 /**
  * 判断给定的字符串是否为一个json字符串
+ * @param stringData
+ * @returns {boolean}
  */
-function isJson(str) {
-    let result = parse(str);
+function isJson(stringData) {
+    let result = parse(stringData);
     if (result) {
         return true;
     } else {
@@ -11,13 +13,22 @@ function isJson(str) {
 }
 
 /**
- * 判断给定的字符串是否为一个json字符串，如果是则转换为object，为否返回false
- * @param {*} str 
+ * 将对象转成json字符串
+ * @param jsonObject
+ * @returns {string}
  */
-function parse(str) {
-    if (typeof str == 'string') {
+function serialize(jsonObject) {
+    return JSON.stringify(jsonObject)
+}
+
+/**
+ * 判断给定的字符串是否为一个json字符串，如果是则转换为object，为否返回false
+ * @param {*} stringData
+ */
+function parse(stringData) {
+    if (typeof stringData == 'string') {
         try {
-            let obj = JSON.parse(str);
+            let obj = JSON.parse(stringData);
             if (typeof obj == 'object' && obj) {
                 return obj;
             } else {
@@ -33,19 +44,20 @@ function parse(str) {
 
 /**
  * 判断给定的字符串是否为一个json字符串，如果是则转换为object，为否返回原来的字符串
- * @param {*} str 
+ * @param {*} stringData
  */
-function tryParse(str) {
-    let result = parse(str);
+function tryParse(stringData) {
+    let result = parse(stringData);
     if (result) {
         return result;
     } else {
-        return str;
+        return stringData;
     }
 }
 
 module.exports = {
     isJson,
-    parse: parse,
-    tryParse: tryParse,
+    serialize,
+    parse,
+    tryParse,
 };
