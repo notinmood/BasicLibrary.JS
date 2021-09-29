@@ -160,5 +160,25 @@ Array.prototype.isHybridArray = function () {
 
 
 Array.prototype.merge = function (...arrays) {
-    return ah.merge(this,...arrays);
+    return ah.merge(this, ...arrays);
+}
+
+/**
+ * 重写系统内转子的concat方法
+ * (重写后可以支持关联数组的合并)
+ * @param arrays
+ * @returns {*[]}
+ */
+Array.prototype.concat = function (...arrays) {
+    return ah.concat(this, ...arrays);
+}
+
+/**
+ * 是否存在某个Key
+ * @param arrayData
+ * @param keyName
+ * @returns {boolean}
+ */
+Array.prototype.hasKey = function (keyName) {
+    return ah.hasKey(this, keyName);
 }

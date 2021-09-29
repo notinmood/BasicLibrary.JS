@@ -15,6 +15,16 @@ let arrayHybrid = [1, 2, 8];
 arrayHybrid["aa"] = "AA";
 
 describe("数组-测试", function () {
+    it("测试-hasKey-索引数组", function () {
+        expect(arrayIndex.hasKey(2)).equals(true);
+        expect(arrayIndex.hasKey(5)).equals(false);
+    });
+
+    it("测试-hasKey-关联数组", function () {
+        expect(arrayAssociation.hasKey('a')).equals(true);
+        expect(arrayAssociation.hasKey('A')).equals(false);
+    });
+
     it("测试-hasMember-索引数组", function () {
         expect(arrayIndex.hasMember(2)).equals(true);
         expect(arrayIndex.hasMember(3)).equals(false);
@@ -80,6 +90,41 @@ describe("数组-测试", function () {
 
     it("测试-getArrayType-混合数组", function () {
         expect(arrayHybrid.getArrayType()).equals(ah.ArrayTypes.hybrid);
+    });
+
+
+});
+
+
+describe("数组合并-测试", function () {
+    it("测试-concat-索引数组", function () {
+        const arrayA = [1, 3, 5];
+        const arrayB = [3, 6, 9];
+        const arrayC = [7, 10];
+
+        let actualValue = arrayA.concat(arrayB, arrayC);
+        actualValue = JSON.stringify(actualValue);
+
+        let expectValue = [1, 3, 5, 3, 6, 9, 7, 10,];
+        expectValue = JSON.stringify(expectValue);
+        expect(actualValue).equals(expectValue);
+    });
+
+    it("测试-concat-关联数组", function () {
+        let arrayA = [];
+        arrayA['a'] = "A";
+        arrayA['b'] = "B";
+        arrayA['c'] = "C";
+        //[1, 3, 5];
+        let arrayB = [3, 6, 9];
+
+
+        let actualValue = arrayA.concat(arrayB);
+        // actualValue = JSON.stringify(actualValue);
+
+        expect(actualValue["a"]).equals("A");
+        expect(actualValue.hasMember(3)).equals(true);
+        expect(actualValue.hasMember("D")).equals(false);
     });
 
     it("测试-merge-索引数组", function () {
@@ -152,7 +197,6 @@ describe("数组-测试", function () {
 
         expect(actualValue).equals(expectValue);
     });
-
 
     it("测试-mergeElementProperty-索引数组", function () {
         let expectValue = [
@@ -239,5 +283,4 @@ describe("数组-测试", function () {
 
         expect(actualValue).equals(expectValue);
     });
-
 });

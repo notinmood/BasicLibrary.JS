@@ -9,12 +9,28 @@
  * @param item
  * @returns {boolean}
  */
-const {main} = require("mocha/lib/cli");
-
 function hasMember(arrayData, item) {
     for (const arrayDataKey in arrayData) {
         if (arrayData[arrayDataKey] == item) {
             return true;
+        }
+    }
+
+    return false;
+}
+
+/**
+ * 是否存在某个Key
+ * @param arrayData
+ * @param keyName
+ * @returns {boolean}
+ */
+function hasKey(arrayData,keyName){
+    for (const arrayDataKey in arrayData) {
+        if(arrayData.hasOwnProperty(arrayDataKey)){
+            if(arrayDataKey==keyName){
+                return true;
+            }
         }
     }
 
@@ -360,6 +376,7 @@ module.exports = {
     merge,
     concat,
     hasMember,
+    hasKey,
     sortByPropertyValue,
     sortByPropertyLength,
     mergeElementProperty,
