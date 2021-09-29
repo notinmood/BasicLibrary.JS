@@ -1,4 +1,5 @@
-
+const th = require("./typeHelper");
+const ah = require("./arrayHelper");
 
 /**
  * 获取Array,string等对象中元素的个数
@@ -6,15 +7,11 @@
  * @param {*} targetObject
  */
 function getLength(targetObject) {
-    let t = typeof targetObject;
-    if (t == 'string') {
+    let typeName = th.getType(targetObject);
+    if (typeName == th.ObjectTypes.string) {
         return targetObject.length;
-    } else if (t == 'object') {
-        let n = 0;
-        for (let i in targetObject) {
-            n++;
-        }
-        return n;
+    } else if (typeName == th.ObjectTypes.array) {
+        return ah.getCount(targetObject);
     }
     return 0;
 }
@@ -56,7 +53,6 @@ async function sleepWrap(msTime, callbackFunc, ...args) {
     await sleep(msTime);
     callbackFunc(...args);
 }
-
 
 
 /**
@@ -202,25 +198,6 @@ function genTreeData(sourceData, idFieldName, parentIdFieldName, childrenNodeNam
 }
 
 
-//
-// /**
-//  * 判断某个对象是否拥有某个成员
-//  */
-// function isObjectMember(targetObject, memberName) {
-//     if (isExist(targetObject) && isExist(memberName)) {
-//         if (targetObject[memberName] == undefined) {
-//             return false;
-//         } else {
-//             return true;
-//         }
-//     } else {
-//         return false;
-//     }
-// }
-
-
-
-
 module.exports = {
     getBindFuncData,
     getBindEventData,
@@ -228,16 +205,10 @@ module.exports = {
 
     sleep,
     sleepWrap,
-    getResultWithTwoFloat,
 
     isEmpty,
     isExist,
-
-
     getLength,
 
     genTreeData,
-
-    ReturnsObject,
-    parseReturnsObject,
 }
