@@ -4,8 +4,8 @@ class Student {
     getName = function () {
         return this.name;
     };
-    setName= function (name){
-        this.name= name;
+    setName = function (name) {
+        this.name = name;
     };
 }
 

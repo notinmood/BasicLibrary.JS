@@ -22,14 +22,16 @@ function getDate(dateString = "") {
  * H或h :小时
  * I或i或m :分钟
  * S或s :秒
- * @param {*} date 
+ * @param {*} date
  */
 function format(date = null, formatter = "") {
-    if (formatter) {} else {
+    if (formatter) {
+    } else {
         formatter = "YYYY-MM-DD HH:mm:SS";
     }
 
-    if (date) {} else {
+    if (date) {
+    } else {
         date = new Date();
     }
     let ret;
@@ -52,8 +54,10 @@ function format(date = null, formatter = "") {
         ret = new RegExp("(" + k + ")").exec(formatter);
         if (ret) {
             formatter = formatter.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
-        };
-    };
+        }
+        ;
+    }
+    ;
     return formatter;
 }
 
@@ -64,10 +68,10 @@ function isSameDay(timeStampA, timeStampB) {
 }
 
 /**
- * 计算出 现在距离1970年1月1日的总天数，因为1970年1月1 是周4   
+ * 计算出 现在距离1970年1月1日的总天数，因为1970年1月1 是周4
  * 所以（总天数+4）/7 取整 就是周数  如果相同就是同一周反之就不是。
- * @param {*} timeStampA 
- * @param {*} timeStampB 
+ * @param {*} timeStampA
+ * @param {*} timeStampB
  */
 function isSameWeek(timeStampA, timeStampB) {
     let A = new Date(timeStampA).setHours(0, 0, 0, 0);

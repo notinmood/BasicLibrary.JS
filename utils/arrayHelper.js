@@ -25,10 +25,10 @@ function hasMember(arrayData, item) {
  * @param keyName
  * @returns {boolean}
  */
-function hasKey(arrayData,keyName){
+function hasKey(arrayData, keyName) {
     for (const arrayDataKey in arrayData) {
-        if(arrayData.hasOwnProperty(arrayDataKey)){
-            if(arrayDataKey==keyName){
+        if (arrayData.hasOwnProperty(arrayDataKey)) {
+            if (arrayDataKey == keyName) {
                 return true;
             }
         }

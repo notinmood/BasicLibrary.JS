@@ -4,7 +4,7 @@
  * 具体键盘编码和键位对应关系参考 https://wenku.baidu.com/view/3f99a76148d7c1c709a14501.html
  * @example
  *  1、页面调用,绑定keypress,进行效果检测(非必须)
-    jQuery(document).ready(function ($) {
+ jQuery(document).ready(function ($) {
         // 绑定事件处理程序
         $('body').keypress(function (e) {
             alert(String.fromCharCode(e.which));
@@ -12,10 +12,10 @@
         });
     });
 
-    2、在合适的地方调用以下代码,来模拟按键
-     $('body').simulateKeyPress(27); //通过键盘码(特殊键位只能使用键盘码，比如esc、tab等键)
-     或者
-     $('body').simulateKeyPress('c'); //通过键位名称(普通键位)
+ 2、在合适的地方调用以下代码,来模拟按键
+ $('body').simulateKeyPress(27); //通过键盘码(特殊键位只能使用键盘码，比如esc、tab等键)
+ 或者
+ $('body').simulateKeyPress('c'); //通过键位名称(普通键位)
  */
 jQuery.fn.simulateKeyPress = function (character) {
     let charName = '';

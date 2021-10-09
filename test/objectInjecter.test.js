@@ -46,7 +46,7 @@ describe("对象注入-测试", function () {
     });
 
     it("获取成员3", function () {
-        expect(moo.getMember("w6","cells")).equals("cells");
+        expect(moo.getMember("w6", "cells")).equals("cells");
     });
 
     it("获取成员4", function () {
@@ -54,7 +54,7 @@ describe("对象注入-测试", function () {
     });
 
     it("获取成员5", function () {
-        const myFunc= moo.getMember("m2.n1.p");
+        const myFunc = moo.getMember("m2.n1.p");
         expect(myFunc(3)).equals(4);
     });
 });

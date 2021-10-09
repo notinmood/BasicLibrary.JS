@@ -16,8 +16,8 @@ String.prototype.reverse = function () {
     return sh.reverse(this);
 };
 
-String.prototype.multi =function (count){
-    return sh.multi(this,count);
+String.prototype.multi = function (count) {
+    return sh.multi(this, count);
 }
 
 /**

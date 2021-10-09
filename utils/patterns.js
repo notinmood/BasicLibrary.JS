@@ -59,6 +59,6 @@ let observer = {
 };
 
 
-module.exports={
-  observer,
+module.exports = {
+    observer,
 }
