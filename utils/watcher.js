@@ -1,5 +1,5 @@
 let watchCallBack = {};
-let watchingKeys = [];
+const watchingKeys = [];
 
 /**
  * 对同一个参数可以设置多个回调函数的Watch。调用示例：
@@ -19,12 +19,10 @@ function watch(keyName, callbackFunc, targetDataSet = null) {
         targetDataSet = getApp().globalData;
     }
 
-    watchCallBack = Object.assign({}, watchCallBack, {
-        [keyName]: watchCallBack[keyName] || []
-    });
+    watchCallBack = {...watchCallBack, [keyName]: watchCallBack[keyName] || []};
     watchCallBack[keyName].push(callbackFunc);
-    if (!watchingKeys.find(x => x === keyName)) {
-        //const that = this;
+    if (!watchingKeys.find((x) => x === keyName)) {
+        // const that = this;
         watchingKeys.push(keyName);
         let val = targetDataSet[keyName];
         Object.defineProperty(targetDataSet, keyName, {
@@ -33,15 +31,14 @@ function watch(keyName, callbackFunc, targetDataSet = null) {
             set(value) {
                 const old = targetDataSet[keyName];
                 val = value;
-                watchCallBack[keyName].map(func => func(value, old));
+                watchCallBack[keyName].map((func) => func(value, old));
             },
             get() {
-                return val
-            }
-        })
+                return val;
+            },
+        });
     }
 }
-
 
 module.exports = {
     watch,

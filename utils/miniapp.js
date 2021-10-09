@@ -123,7 +123,10 @@ function getCurrentPageUrl() {
     return url
 }
 
-/*获取当前页带参数的url*/
+/**
+ * 获取当前页带参数的url
+ * @returns {string}
+ */
 function getCurrentPageUrlWithArgs() {
     var pages = getCurrentPages()    //获取加载的页面
     var currentPage = pages[pages.length - 1]    //获取当前页面的对象

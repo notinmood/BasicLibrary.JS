@@ -1,4 +1,4 @@
-const sh = require("./stringHelper");
+const sh = require('./stringHelper');
 
 /**
  * 给原型添加新的方法,不需要导出对象.
@@ -18,7 +18,7 @@ String.prototype.reverse = function () {
 
 String.prototype.multi = function (count) {
     return sh.multi(this, count);
-}
+};
 
 /**
  * 给原型添加新的方法,不需要导出对象.
