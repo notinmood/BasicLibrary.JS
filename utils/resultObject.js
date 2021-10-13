@@ -7,16 +7,16 @@ const th = require("./typeHelper");
 
 /**
  * 从服务端返回的带格式的数据
- * 属性{bool}resultType 表示反回信息的真或者假
- * 属性{string}title返回信息的主题信息
- * 属性{string}desc返回信息的内容信息
- * 属性{object}misc返回信息的各种其他信息，这是一个自定义对象可以任意扩展其子属性信息
+ * 属性{bool} resultType 表示反回信息的真或者假
+ * 属性{string} message 返回信息的主题信息
+ * 属性{object} data 返回信息的内容信息
+ * 属性{object} misc 返回信息的各种其他信息，这是一个自定义对象可以任意扩展其子属性信息
  */
 module.exports = class ResultObject {
-    constructor(resultType = true, title = '', desc = '', misc = null) {
-        this.resultType = resultType;
-        this.title = title;
-        this.desc = desc;
+    constructor(status = true, message = '', data = null, misc = null) {
+        this.status = status;
+        this.message = message;
+        this.data = data;
         if (misc == null) {
             misc = {};
         }
@@ -43,24 +43,24 @@ module.exports = class ResultObject {
 
 
     /**
-     * 解析服务器返回信息为本地类型ReturnsObject的对象
-     * @param {*} data 服务器返回的json格式字符串或者json对象
+     * 解析服务器返回信息为本地类型ResultObject的对象
+     * @param {*} jsonData 服务器返回的json格式字符串或者json对象
      */
-    static parseReturnsObject = function (data) {
-        let typeInfo = th.getType(data);
+    static parse = function (jsonData) {
+        let typeInfo = th.getType(jsonData);
         if (typeInfo == th.ObjectTypes.string) {
-            data = JSON.parse(data);
-            typeInfo = th.getType(data);
+            jsonData = JSON.parse(jsonData);
+            typeInfo = th.getType(jsonData);
         }
 
         let result = null;
         if (typeInfo == th.ObjectTypes.object) {
-            let resultType = oh.getMember(data, 'resultType', false);
-            let title = oh.getMember(data, 'title', '');
-            let desc = oh.getMember(data, 'desc', '');
-            let misc = oh.getMember(data, 'misc', null);
+            let status = oh.getMember(jsonData, 'status', false);
+            let message = oh.getMember(jsonData, 'message', '');
+            let data = oh.getMember(jsonData, 'data', null);
+            let misc = oh.getMember(jsonData, 'misc', null);
 
-            result = new ResultObject(resultType, title, desc, misc);
+            result = new ResultObject(status, message, data, misc);
         }
 
         return result;
