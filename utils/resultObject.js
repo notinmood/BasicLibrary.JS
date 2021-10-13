@@ -41,6 +41,23 @@ module.exports = class ResultObject {
         return oh.getMember(this.misc, name, defaultValue);
     }
 
+    /**
+     * 将ResultObject转换成为json字符串
+     * @returns {string}
+     */
+    compose = function () {
+        return ResultObject.compose(this);
+    }
+
+    /**
+     * 将ResultObject转换成为json字符串
+     * @param resultObject
+     * @returns {string}
+     */
+    static  compose = function (resultObject) {
+        return JSON.stringify(resultObject);
+    }
+
 
     /**
      * 解析服务器返回信息为本地类型ResultObject的对象

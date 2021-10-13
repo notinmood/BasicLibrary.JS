@@ -22,6 +22,11 @@ describe("业务包名称-测试", function () {
         expect(myObject.getMiscItem("A")).equals(myData.getMiscItem("A"));
         expect(myObject.getMiscItem("C")).equals(myData.getMiscItem("C"));
     });
+
+    it('测试-compose实例方法和静态方法', function () {
+        expect(myObject.compose()).equals(myJson);
+        expect(ro.compose(myObject)).equals(myJson);
+    });
 });
 
 
