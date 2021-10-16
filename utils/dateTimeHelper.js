@@ -1,4 +1,8 @@
-//字符串转日期格式，dateString要转为日期格式的字符串
+/**
+ * 字符串转日期格式，dateString要转为日期格式的字符串
+ * @param dateString
+ * @returns {Date}
+ */
 function getDate(dateString = "") {
     let date = null;
 
