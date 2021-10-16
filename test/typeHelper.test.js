@@ -67,4 +67,10 @@ describe('数据类型测试', function () {
         expect(oh.getType(myObject)).equals(oh.ObjectTypes.object);
     });
 
+    it('date 类型因为是object的子类,所以可以自由添加属性', function () {
+        let myDate= new Date();
+        myDate["mm"]= "foo";
+
+        expect(myDate["mm"]).equals("foo");
+    });
 });

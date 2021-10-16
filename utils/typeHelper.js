@@ -64,7 +64,98 @@ const getType = function (data) {
     return typeName;
 };
 
+/**
+ *
+ * @param data
+ * @returns {boolean}
+ */
+const isNumber = function (data) {
+    return getType(data) == ObjectTypes.number;
+}
+
+/**
+ *
+ * @param data
+ * @returns {boolean}
+ */
+const isString = function (data) {
+    return getType(data) == ObjectTypes.string;
+}
+
+/**
+ *
+ * @param data
+ * @returns {boolean}
+ */
+const isArray = function (data) {
+    return getType(data) == ObjectTypes.array;
+}
+
+/**
+ *
+ * @param data
+ * @returns {boolean}
+ */
+const isBoolean = function (data) {
+    return getType(data) == ObjectTypes.boolean;
+}
+
+/**
+ *
+ * @param data
+ * @returns {boolean}
+ */
+const isUndefined = function (data) {
+    return getType(data) == ObjectTypes.undefined;
+}
+
+/**
+ *
+ * @param data
+ * @returns {boolean}
+ */
+const isNull = function (data) {
+    return getType(data) == ObjectTypes.null;
+}
+
+/**
+ *
+ * @param data
+ * @returns {boolean}
+ */
+const isSymbol = function (data) {
+    return getType(data) == ObjectTypes.symbol;
+}
+
+/**
+ *
+ * @param data
+ * @returns {boolean}
+ */
+const isObject = function (data) {
+    return getType(data) == ObjectTypes.object;
+}
+
+/**
+ *
+ * @param data
+ * @returns {boolean}
+ */
+const isFunction = function (data) {
+    return getType(data) == ObjectTypes.function;
+}
+
+
 module.exports = {
     ObjectTypes,
     getType,
+    isNumber,
+    isString,
+    isArray,
+    isBoolean,
+    isUndefined,
+    isNull,
+    isSymbol,
+    isObject,
+    isFunction,
 };

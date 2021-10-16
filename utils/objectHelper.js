@@ -1,3 +1,5 @@
+const th = require("./typeHelper");
+
 /**
  * 判断一个对象内是否存在某成员
  * @param objectData 目标对象实例
@@ -95,7 +97,61 @@ function _getMemberInner(targetObject, propertyName, defaultValue = null) {
     }
 }
 
+/**
+ * 与assign相对,assignDeeply是深度赋值
+ * @param args
+ * @returns {{}|*}
+ */
+function assignDeeply(...args) {
+    if (args.length === 0) {
+        console.error('extends params is undefined')
+        return {};
+    }
+
+    if (args.length === 1) {
+        return args[0]
+    }
+
+    //要合并的目标对象
+    let target = args[0];
+    //要合并的内容
+    let sources = args.slice(1, args.length)
+
+    if (th.isObject(target) && th.isArray(target)) {
+        target = {};
+    }
+
+    sources.map(function (item) {
+        //防止死循环
+        if (target === item) {
+            return false;
+        }
+
+        //如果内容是对象
+        if (th.isObject(item) || th.isArray(item)) {
+            for (const key in item) {
+                if (item.hasOwnProperty(key)) {
+                    if (th.isObject(item[key])) {
+                        //修正数据
+                        target[key] = (target[key] && th.isObject(target[key])) ? target[key] : {};
+                        target[key] = assignDeeply(target[key], item[key])
+                    } else if (th.isArray(item[key])) {
+                        //修正数据
+                        target[key] = (target[key] && th.isArray(target[key])) ? target[key] : [];
+                        target[key] = assignDeeply(target[key], item[key])
+                    } else {
+                        //基本类型直接赋值
+                        target[key] = item[key]
+                    }
+                }
+            }
+        }
+    })
+    return target
+}
+
 module.exports = {
     hasMember,
     getMember,
+    assignDeeply,
 }
