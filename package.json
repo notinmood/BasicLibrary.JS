@@ -1,5 +1,5 @@
 {
-  "name": "basicelibary.javascript",
+  "name": "basiclibrary.javascript",
   "version": "1.0.1",
   "scripts": {
     "test": "./node_modules/.bin/mocha"
