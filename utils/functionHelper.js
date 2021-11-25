@@ -1,3 +1,8 @@
+/**
+ * 判断是否为函数
+ * @param funcName
+ * @returns {boolean}
+ */
 function isFunction(funcName) {
     if (typeof (funcName) == "function" && typeof (funcName.nodeType) != "number") {
         return true;
@@ -27,6 +32,8 @@ function getArgsCount(funcName) {
  * @param {Function} fn 待柯里化的函数
  * @param   args 已经接收的参数列表
  * @return {Function}
+ * ════════════════════════
+ * 参考 https://www.cnblogs.com/bidong/p/15498133.html
  */
 const currying = function (fn, ...args) {
     // fn需要的参数个数
