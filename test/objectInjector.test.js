@@ -1,7 +1,7 @@
 /**
  * 使用注入器的时候,只需要导入不需要将其赋值为本地变量(因为不需要引用这个变量了).
  */
-require("../utils/objectInjecter");
+require("../utils/objectInjector");
 const expect = require("chai").expect;
 const {Student} = require("./res/Student");
 

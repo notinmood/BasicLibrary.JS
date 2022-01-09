@@ -1,2 +1,2 @@
-import _module from './htmlHelper.js';
-export const helper = _module;
+import all from './htmlHelper.js';
+export const helper = all;

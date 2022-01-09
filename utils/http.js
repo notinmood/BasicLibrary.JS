@@ -1,6 +1,6 @@
 const miniapp = require('./miniapp.js');
 const util = require("./util.js");
-const cipher = require("./cipher.js");
+const cipher = require("./cipherHelper.js");
 const config = require("../config.js");
 const jsonHelper = require("./jsonHelper.js");
 
