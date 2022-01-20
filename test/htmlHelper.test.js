@@ -9,4 +9,8 @@ describe("HTML功能测试", function () {
     it('测试HTML解码', function () {
         expect(hh.htmlDecode('&lt;br&gt;ccccc&lt;p&gt;aaaaa&lt;/p&gt;')).equals("<br>ccccc<p>aaaaa</p>");
     });
+
+    // it('测试HTML解码', function () {
+    //     expect(hh.htmlDecode('&lt;br&gt;ccccc&lt;p&gt;aaaaa&lt;/p&gt;', true)).equals("<br>ccccc<p>aaaaa</p>");
+    // });
 });

@@ -1,8 +1,8 @@
 /*1. 用正则表达式实现html转码*/
-htmlEncode = function (str) {
+htmlEncode = function (originalHTML) {
     let s = "";
-    if (str.length == 0) return "";
-    s = str.replace(/&/g, "&amp;");
+    if (originalHTML.length == 0) return "";
+    s = originalHTML.replace(/&/g, "&amp;");
     s = s.replace(/</g, "&lt;");
     s = s.replace(/>/g, "&gt;");
     s = s.replace(/ /g, "&nbsp;");
@@ -12,10 +12,11 @@ htmlEncode = function (str) {
 }
 
 /*2. 用正则表达式实现html解码*/
-htmlDecode = function (str) {
+htmlDecode = function (encodedHTML) {
+    if (encodedHTML.length == 0) return "";
+
     let s = "";
-    if (str.length == 0) return "";
-    s = str.replace(/&amp;/g, "&");
+    s = encodedHTML.replace(/&amp;/g, "&");
     s = s.replace(/&lt;/g, "<");
     s = s.replace(/&gt;/g, ">");
     s = s.replace(/&nbsp;/g, " ");
