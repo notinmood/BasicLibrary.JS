@@ -1,6 +1,6 @@
 const expect = require('chai').expect;
 const oh = require("../../utils/objectHelper");
-const st = require("../res/Student");
+const st = require("../_res/Student");
 
 describe("对象其他方法测试", function () {
     const student = new st.Student();

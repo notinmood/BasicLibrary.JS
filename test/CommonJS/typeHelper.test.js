@@ -1,6 +1,6 @@
 const expect = require('chai').expect;
 const oh = require("../../utils/typeHelper");
-const st = require("../res/Student");
+const st = require("../_res/Student");
 
 
 describe('数据类型测试', function () {
