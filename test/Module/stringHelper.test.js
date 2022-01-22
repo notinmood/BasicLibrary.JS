@@ -1,4 +1,4 @@
-import {helper} from "../utils/stringHelper.mjs";
+import {helper} from "../../utils/stringHelper.mjs";
 import {expect} from "chai";
 
 describe("测试组件名称", function () {

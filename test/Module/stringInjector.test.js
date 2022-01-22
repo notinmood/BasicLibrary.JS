@@ -1,5 +1,5 @@
 import {expect} from "chai";
-import {} from "../utils/stringInjector.mjs";
+import {} from "../../utils/stringInjector.mjs";
 
 describe("测试组件名称", function () {
     it("测试单元名称", function () {

@@ -1,4 +1,4 @@
-const fh = require("../utils/functionHelper");
+const fh = require("../../utils/functionHelper");
 const expect = require('chai').expect;
 
 

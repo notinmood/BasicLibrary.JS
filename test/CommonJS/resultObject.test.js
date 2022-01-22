@@ -1,4 +1,4 @@
-const ro = require("../utils/resultObject");
+const ro = require("../../utils/resultObject");
 const expect = require('chai').expect;
 
 const misc = {"A": "aaa", "B": 111};

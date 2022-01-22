@@ -1,8 +1,8 @@
 const expect = require('chai').expect;
-const ah = require("../utils/arrayHelper");
-const biz = require("../utils/arrayInjector");
-const th = require("../utils/typeHelper");
-const util = require("../utils/util");
+const ah = require("../../utils/arrayHelper");
+const biz = require("../../utils/arrayInjector");
+const th = require("../../utils/typeHelper");
+const util = require("../../utils/util");
 
 let arrayIndex = [2, 4, 6, 8, 10];
 

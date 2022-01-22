@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const biz = require("../utils/numberHelper");
+const biz = require("../../utils/numberHelper");
 
 describe("数字逻辑-测试", function () {
     const myData = 1234.5678;

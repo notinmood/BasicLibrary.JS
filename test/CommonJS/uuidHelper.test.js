@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const biz = require("../utils/uuidHelper");
+const biz = require("../../utils/uuidHelper");
 
 describe("UUID-测试", function () {
     it("测试-新建uuid36", function () {
