@@ -306,12 +306,9 @@ function _sortTwoValue(val1, val2, sortOrder = "ASC") {
 function mergeElementProperty(mainArray, ...otherArrays) {
     let result = mainArray;
 
-    // result= _mergeElementProperty(mainArray,otherArrays[0]);
-
     for (const currentArray of otherArrays) {
         result = _mergeElementProperty(result, currentArray);
     }
-
 
     return result;
 }
@@ -354,8 +351,6 @@ function concat(...arrays) {
                     }
                 }
             }
-
-            // result = result.concat(currentArray);
         }
     }
 

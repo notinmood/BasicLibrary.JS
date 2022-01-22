@@ -1,28 +1,28 @@
 /*1. 用正则表达式实现html转码*/
 htmlEncode = function (originalHTML) {
-    let s = "";
+    let result = "";
     if (originalHTML.length == 0) return "";
-    s = originalHTML.replace(/&/g, "&amp;");
-    s = s.replace(/</g, "&lt;");
-    s = s.replace(/>/g, "&gt;");
-    s = s.replace(/ /g, "&nbsp;");
-    s = s.replace(/\'/g, "&#39;");
-    s = s.replace(/\"/g, "&quot;");
-    return s;
+    result = originalHTML.replace(/&/g, "&amp;");
+    result = result.replace(/</g, "&lt;");
+    result = result.replace(/>/g, "&gt;");
+    result = result.replace(/ /g, "&nbsp;");
+    result = result.replace(/\'/g, "&#39;");
+    result = result.replace(/\"/g, "&quot;");
+    return result;
 }
 
 /*2. 用正则表达式实现html解码*/
 htmlDecode = function (encodedHTML) {
     if (encodedHTML.length == 0) return "";
 
-    let s = "";
-    s = encodedHTML.replace(/&amp;/g, "&");
-    s = s.replace(/&lt;/g, "<");
-    s = s.replace(/&gt;/g, ">");
-    s = s.replace(/&nbsp;/g, " ");
-    s = s.replace(/&#39;/g, "\'");
-    s = s.replace(/&quot;/g, "\"");
-    return s;
+    let result = "";
+    result = encodedHTML.replace(/&amp;/g, "&");
+    result = result.replace(/&lt;/g, "<");
+    result = result.replace(/&gt;/g, ">");
+    result = result.replace(/&nbsp;/g, " ");
+    result = result.replace(/&#39;/g, "\'");
+    result = result.replace(/&quot;/g, "\"");
+    return result;
 }
 
 module.exports = {

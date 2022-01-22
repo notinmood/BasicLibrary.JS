@@ -33,3 +33,18 @@ import {} from "../utils/stringInjector.mjs";
 >通过 import 导入的文件必须含有文件名扩展符 ".mjs"
 
 
+3. 在HTML页面中调用,需要使用webpack配合
+   1. 在HTML中新建立一个 js 文件(假定名称为main.js)，类似如下
+    ```shell
+    const ah = require("basiclibrary.javascript/utils/arrayHelper");
+    const nh = require("basiclibrary.javascript/utils/numberHelper");
+    const jQuery = require("jquery");
+    
+    let all = {nh, ah};
+    
+    window._bl_ = all;
+    window.$ = jQuery;
+    ```
+   2. 用webpack转换这个main.js 为 bundle.js
+   3. 然后再HTML页面引用这个 bundle.js
+   4. 在HTML页面内可以通过 _bl_ 继续使用包含的类型和方法 

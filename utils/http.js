@@ -51,13 +51,13 @@ function requestApiPost(caller, url, params, successFun, failFun, completeFun) {
  * }
  */
 function requestApi(paramsObject) {
-    let url = getParamSafely(paramsObject, 'url', '');
-    let params = getParamSafely(paramsObject, 'params', '');
-    let method = getParamSafely(paramsObject, 'method', 'GET');
-    let caller = getParamSafely(paramsObject, 'caller');
-    let successFun = getParamSafely(paramsObject, 'successFun');
-    let failFun = getParamSafely(paramsObject, 'failFun');
-    let completeFun = getParamSafely(paramsObject, 'completeFun');
+    let url = _getParamSafely(paramsObject, 'url', '');
+    let params = _getParamSafely(paramsObject, 'params', '');
+    let method = _getParamSafely(paramsObject, 'method', 'GET');
+    let caller = _getParamSafely(paramsObject, 'caller');
+    let successFun = _getParamSafely(paramsObject, 'successFun');
+    let failFun = _getParamSafely(paramsObject, 'failFun');
+    let completeFun = _getParamSafely(paramsObject, 'completeFun');
 
     _requestApi(caller, url, params, method, successFun, failFun, completeFun)
 }
@@ -128,15 +128,15 @@ function _requestApi(caller, url, params, method, successFun, failFun, completeF
  * }
  */
 function requestCommonApi(paramsObject) {
-    let funcName = getParamSafely(paramsObject, 'funcName', '');
-    let funcParam = getParamSafely(paramsObject, 'funcParam', '');
-    let moreParams = getParamSafely(paramsObject, 'moreParams', '');
-    let method = getParamSafely(paramsObject, 'method', 'GET');
-    let caller = getParamSafely(paramsObject, 'caller');
-    let callbackfuncs = getParamSafely(paramsObject, 'callbackfuncs');
-    let className = getParamSafely(paramsObject, 'className');
-    let showLoading = getParamSafely(paramsObject, 'showLoading', true);
-    let returnJson = getParamSafely(paramsObject, 'returnJson', true);
+    let funcName = _getParamSafely(paramsObject, 'funcName', '');
+    let funcParam = _getParamSafely(paramsObject, 'funcParam', '');
+    let moreParams = _getParamSafely(paramsObject, 'moreParams', '');
+    let method = _getParamSafely(paramsObject, 'method', 'GET');
+    let caller = _getParamSafely(paramsObject, 'caller');
+    let callbackfuncs = _getParamSafely(paramsObject, 'callbackfuncs');
+    let className = _getParamSafely(paramsObject, 'className');
+    let showLoading = _getParamSafely(paramsObject, 'showLoading', true);
+    let returnJson = _getParamSafely(paramsObject, 'returnJson', true);
     _requestCommonApi(caller, funcName, funcParam, moreParams, method, callbackfuncs, className, showLoading, returnJson);
 }
 
@@ -172,10 +172,10 @@ function requestCommonApiPost(caller, funcName, funcParam, moreParams, callbackF
  * @param {String} method 请求类型
  * @param {*} funcParam 服务器函数方法后面括号内的参数，统一放在用此参数管理，多个参数的值用^^分隔，仅仅传递参数值（不用传递参数名称）
  * @param {*} moreParams 参数数组。如果是方法内通过input等形式接受的其他参数，使用moreParams[参数名]=参数值 的方法传递
- * @param {*} callbackfuncs 可以是一个方法（success对应的方法）；也可以是一个方法数组，数组内的3个元素分别为successFunc、failFunc、completeFunc
+ * @param {*} callbackFuncs 可以是一个方法（success对应的方法）；也可以是一个方法数组，数组内的3个元素分别为successFunc、failFunc、completeFunc
  * @param {*} showLoading 是否显示“正在加载。。。”的遮罩层提示框
  */
-function _requestCommonApi(caller, funcName, funcParam, moreParams, method, callbackfuncs, className = 'Biz', showLoading = true, returnJson = true) {
+function _requestCommonApi(caller, funcName, funcParam, moreParams, method, callbackFuncs, className = 'Biz', showLoading = true, returnJson = true) {
     // let displayLoading = getApp().globalData.displayLoading;
     // if (displayLoading == null || displayLoading == false) {
     //   getApp().globalData.displayLoading = true;
@@ -222,21 +222,21 @@ function _requestCommonApi(caller, funcName, funcParam, moreParams, method, call
     let successFunc = null;
     let failFunc = null;
     let completeFunc = null;
-    if (callbackfuncs) {
-        if (typeof (callbackfuncs) == "function") {
-            successFunc = callbackfuncs;
+    if (callbackFuncs) {
+        if (typeof (callbackFuncs) == "function") {
+            successFunc = callbackFuncs;
         } else {
-            if (callbackfuncs instanceof Array) {
-                if (callbackfuncs[0]) {
-                    successFunc = callbackfuncs[0];
+            if (callbackFuncs instanceof Array) {
+                if (callbackFuncs[0]) {
+                    successFunc = callbackFuncs[0];
                 }
 
-                if (callbackfuncs[1]) {
-                    failFunc = callbackfuncs[1];
+                if (callbackFuncs[1]) {
+                    failFunc = callbackFuncs[1];
                 }
 
-                if (callbackfuncs[2]) {
-                    completeFunc = callbackfuncs[2];
+                if (callbackFuncs[2]) {
+                    completeFunc = callbackFuncs[2];
                 }
             }
         }
@@ -279,7 +279,7 @@ function arithmetic(timeStamp, randomStr) {
     return signature;
 }
 
-function getParamSafely(paramObject, paramName, defaultValue) {
+function _getParamSafely(paramObject, paramName, defaultValue) {
     let target = paramObject[paramName];
     if (target != undefined) {
         return target;

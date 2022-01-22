@@ -45,8 +45,8 @@ module.exports = class ResultObject {
      * 将ResultObject转换成为json字符串
      * @returns {string}
      */
-    compose = function () {
-        return ResultObject.compose(this);
+    stringify = function () {
+        return ResultObject.stringify(this);
     }
 
     /**
@@ -54,7 +54,7 @@ module.exports = class ResultObject {
      * @param resultObject
      * @returns {string}
      */
-    static  compose = function (resultObject) {
+    static  stringify = function (resultObject) {
         return JSON.stringify(resultObject);
     }
 
