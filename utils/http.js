@@ -6,6 +6,10 @@ const jsonHelper = require("./jsonHelper.js");
 
 
 /**
+ * TODO:将 requestCommonApi 改名为 requestBizApi
+ */
+
+/**
  * @desc    API请求接口类封装
  * 推荐用这2种方式：
  * requestApi(paramsObject)  //调用服务端的url
@@ -133,11 +137,11 @@ function requestCommonApi(paramsObject) {
     let moreParams = _getParamSafely(paramsObject, 'moreParams', '');
     let method = _getParamSafely(paramsObject, 'method', 'GET');
     let caller = _getParamSafely(paramsObject, 'caller');
-    let callbackfuncs = _getParamSafely(paramsObject, 'callbackfuncs');
+    let callbackFuncs = _getParamSafely(paramsObject, 'callbackfuncs');
     let className = _getParamSafely(paramsObject, 'className');
     let showLoading = _getParamSafely(paramsObject, 'showLoading', true);
     let returnJson = _getParamSafely(paramsObject, 'returnJson', true);
-    _requestCommonApi(caller, funcName, funcParam, moreParams, method, callbackfuncs, className, showLoading, returnJson);
+    _requestCommonApi(caller, funcName, funcParam, moreParams, method, callbackFuncs, className, showLoading, returnJson);
 }
 
 
@@ -146,11 +150,11 @@ function requestCommonApi(paramsObject) {
  * @param {*} funcName 服务器函数方法名称
  * @param {*} funcParam 服务器函数方法后面括号内的参数，统一放在用此参数管理，多个参数的值用^^分隔，仅仅传递参数值（不用传递参数名称）
  * @param {*} moreParams 参数数组。如果是方法内通过input等形式接受的其他参数，使用moreParams[参数名]=参数值 的方法传递
- * @param {*} callbackfuncs 可以是一个方法（success对应的方法）；也可以是一个方法数组，数组内的3个元素分别为successFunc、failFunc、completeFunc
+ * @param {*} callbackFuncs 可以是一个方法（success对应的方法）；也可以是一个方法数组，数组内的3个元素分别为successFunc、failFunc、completeFunc
  * @param {*} showLoading 是否显示“正在加载。。。”的遮罩层提示框
  */
-function requestCommonApiGet(caller, funcName, funcParam, moreParams, callbackfuncs, className = 'Biz', showLoading = true, returnJson = true) {
-    _requestCommonApi(caller, funcName, funcParam, moreParams, "GET", callbackfuncs, className, showLoading, returnJson);
+function requestCommonApiGet(caller, funcName, funcParam, moreParams, callbackFuncs, className = 'Biz', showLoading = true, returnJson = true) {
+    _requestCommonApi(caller, funcName, funcParam, moreParams, "GET", callbackFuncs, className, showLoading, returnJson);
 }
 
 /**

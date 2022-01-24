@@ -23,8 +23,8 @@ describe("业务包名称-测试", function () {
         expect(myObject.getMiscItem("C")).equals(myData.getMiscItem("C"));
     });
 
-    it('测试-compose实例方法和静态方法', function () {
-        expect(myObject.compose()).equals(myJson);
+    it('测试-stringify实例方法和静态方法', function () {
+        expect(myObject.stringify()).equals(myJson);
         expect(ro.stringify(myObject)).equals(myJson);
     });
 });
