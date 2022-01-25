@@ -33,7 +33,7 @@ import {} from "../utils/stringInjector.mjs";
 >通过 import 导入的文件必须含有文件名扩展符 ".mjs"
 
 
-3. 在HTML页面中调用,需要使用webpack配合
+3. 在HTML页面中调用,需要使用webpack配合,使用的大概流程如下：
    1. 在HTML中新建立一个 js 文件(假定名称为main.js)，类似如下
     ```shell
     const ah = require("basiclibrary.javascript/utils/arrayHelper");

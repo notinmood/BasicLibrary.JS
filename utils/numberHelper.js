@@ -5,7 +5,7 @@ const sh = require("./stringHelper");
  * @param precision {number} 获取结果的精度(默认2位小数精度)
  * @returns {number|string}
  */
-function getPreciseFloat(value, precision = 2) {
+function getFloat(value, precision = 2) {
     const paddingZeros = sh.multi("0",precision);
 
     const temp = parseInt("1" + paddingZeros);
@@ -30,5 +30,8 @@ function getPreciseFloat(value, precision = 2) {
 }
 
 module.exports = {
-    getPreciseFloat,
+    /**
+     * 获取带精度的浮点数
+     */
+    getFloat: getFloat,
 };

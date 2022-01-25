@@ -1,5 +1,5 @@
 /**
- * 获取uuid字符串
+ * 获取 uuid 字符串
  * @param {*} length uuid的长度，默认为0表示获取标准长度的uuid
  * @param {*} radix uuid组成的字符的进制格式，默认为16表示标准的格式
  */

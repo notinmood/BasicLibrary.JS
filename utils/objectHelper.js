@@ -36,7 +36,6 @@ let _hasMemberInner = function (objectData, memberName) {
     }
 }
 
-
 /**
  * 獲取对象的成员信息。如果指定的成员名称不存在，则返回defaultValue。
  * @param {*} targetObject

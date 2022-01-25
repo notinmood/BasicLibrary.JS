@@ -3,6 +3,7 @@ const util = require("./util.js");
 const cipher = require("./cipherHelper.js");
 const config = require("../config.js");
 const jsonHelper = require("./jsonHelper.js");
+const uuidHelper = require("./uuidHelper.js");
 
 
 /**
@@ -207,7 +208,7 @@ function _requestCommonApi(caller, funcName, funcParam, moreParams, method, call
     var url = '/index/Open/commonOperate4Client';
 
     let thisTime = Date.now();
-    let uuid = util.uuid();
+    let uuid = uuidHelper.create();
     let sign = arithmetic(thisTime, uuid);
 
     params['funcName'] = funcName;

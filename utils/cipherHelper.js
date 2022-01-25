@@ -324,7 +324,37 @@ function sha1(s) {
     return hex;
 }
 
+/**
+ * 根据两个变量和一个常量生成加密签名的算法
+ * @param timeStamp 变量1，通常取当前的时间戳
+ * @param randomString 变量2，通常取一个随机字符串
+ * @param token 常量，一个令牌值
+ * @returns {string}
+ */
+function calcSignature(timeStamp, randomString, token = '') {
+    if(!token){
+        token = 'ChinaBoy';
+    }
+
+    let arr = [];
+    arr.push(timeStamp);
+    arr.push(randomString);
+    arr.push(token);
+    //按照首字母大小写顺序排序
+    arr = arr.sort();
+    //拼接成字符串
+    let str = arr.join("");
+    //进行加密
+    let signature = self.sha1(str);
+    signature = self.md5(signature);
+    //转换成大写
+    signature = signature.toUpperCase();
+    return signature;
+}
+
+
 module.exports = {
     sha1,
-    md5: hex_md5,
+    md5      : hex_md5,
+    calcSignature: calcSignature,
 }
