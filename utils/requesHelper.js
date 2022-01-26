@@ -42,14 +42,17 @@ function request(url, settingObject = null, submitDataObject = null) {
 
 /**
  * 对服务器端带权限验证的业务逻辑的请求方法
- * @param url 请求的服务器地址(必选)
+ * @param url 请求的服务器地址(必选,服务器API统一暴露地址，内部必选实现了对业务逻辑的调用、安全验证等功能)
+ *      可以参考 第一评测项目的 /index.php/open/commonOperate
  * @param bizObject 请求服务器过程的商务逻辑对象
  *      本对象包含以下成员:
- *      - funcName 调用服务器端函数的名称
+ *      - className 调用服务器端类型的名称(默认为 Biz 类)
+ *      - funcName 调用服务器端函数的名称(必选)
  *      - funcParam 调用服务器端函数的参数,多个参数用 ^^ 分割的字符串或者直接传递仅有value(没有key)的数组,类似["zhangsan",20]
  *        (推荐做法:
  *        服务器端函数后面的括号内不直接写参数，而是在代码段内用 $_GET 或者 $_POST 接收参数;
  *        这样就不必使用 funcParam 给服务器函数传递多个参数的时候进行 ^^ 拼接了)
+ *
  *
  * @param settingObject 请求服务器过程的信息设置对象(可以为 null)，
  *      本对象包含以下成员:
@@ -81,7 +84,17 @@ function requestBiz(url, bizObject, settingObject = null, submitDataObject = nul
     submitDataObject['a__r'] = randomString;
     submitDataObject['a__s'] = signature;
 
-    //TODO: 可以对 successFunc 进一步解析处理
+    /**
+     * 将解析后的数据交给 回调函数
+     */
+    if (returnJson == true) {
+        let successFunc = ObjectHelper.getMember(settingObject, 'successFunc');
+        let successFuncNew = function (serverResult) {
+            let returnValue = JSON.parse(serverResult);
+            typeof successFunc == 'function' && successFunc(returnValue);
+        }
+        settingObject["successFunc"] = successFuncNew;
+    }
 
     request(url, settingObject, submitDataObject);
 }
