@@ -1,9 +1,11 @@
 {
     "name": "basiclibrary.javascript",
-    "version": "1.1.4",
+    "version": "1.1.5",
     "author": "Shandong Xiedali",
     "keywords": [
-        "library"
+        "library",
+        "basic class",
+        "collection"
     ],
     "description": "a JavaScript class library",
     "license": "MIT",

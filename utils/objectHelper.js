@@ -149,8 +149,16 @@ function assignDeeply(...args) {
     return target
 }
 
+/**
+ * 获取所有属性的数量
+ */
+function getMemberCount(targetObject){
+   return Object.getOwnPropertyNames(targetObject).length;
+}
+
 module.exports = {
     hasMember,
     getMember,
     assignDeeply,
+    getMemberCount,
 }

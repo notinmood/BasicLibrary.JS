@@ -1,5 +1,6 @@
 const th = require("./typeHelper");
 const ah = require("./arrayHelper");
+const oh = require("./objectHelper");
 
 /**
  * 获取Array,string等对象中元素的个数
@@ -8,11 +9,20 @@ const ah = require("./arrayHelper");
  */
 function getLength(targetObject) {
     let typeName = th.getType(targetObject);
-    if (typeName == th.ObjectTypes.string) {
-        return targetObject.length;
-    } else if (typeName == th.ObjectTypes.array) {
-        return ah.getCount(targetObject);
+    switch (typeName) {
+        case th.ObjectTypes.string:
+            return targetObject.length;
+        case th.ObjectTypes.array:
+            return ah.getCount(targetObject);
+        case th.ObjectTypes.object:
+            return oh.getMemberCount(targetObject);
     }
+
+    // if (typeName == th.ObjectTypes.string) {
+    //     return targetObject.length;
+    // } else if (typeName == th.ObjectTypes.array) {
+    //     return ah.getCount(targetObject);
+    // }
     return 0;
 }
 

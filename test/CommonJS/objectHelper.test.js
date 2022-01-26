@@ -1,6 +1,7 @@
 const expect = require('chai').expect;
 const oh = require("../../utils/objectHelper");
 const st = require("../_res/Student");
+const {getLength} = require("../../utils/util");
 
 describe("对象其他方法测试", function () {
     const student = new st.Student();
@@ -24,6 +25,12 @@ describe("对象其他方法测试", function () {
     it("成员存在性", function () {
         expect(oh.hasMember(student, "city")).equals(false);
     });
+
+    it('成员数量', function () {
+        let actualData = oh.getMemberCount(student);
+        let expectData = 4;
+        expect(actualData).equals(expectData);
+    });
 });
 
 describe("其他复杂方法的测试", function () {
@@ -31,6 +38,7 @@ describe("其他复杂方法的测试", function () {
         let obj1 = {a: {b: 1}};
         let obj2 = oh.assignDeeply({}, obj1)
         let obj3 = Object.assign({}, obj1);
+
         obj1.a.b = 2;
         // obj2.a.b // 1
         // obj3.a.b // 2
@@ -49,18 +57,25 @@ describe("其他复杂方法的测试", function () {
 
         let obj2 = oh.assignDeeply([], obj1)
         let obj3 = Object.assign([], obj1);
-        obj1.a.b = 2;
 
+        obj1.a.b = 2;
         // obj2.a.b // 1
         // obj3.a.b // 2
-
-
-        // console.log(obj1);
-        // console.log(obj2);
-        // console.log(obj3);
 
         expect(2).equals(obj1.a.b);
         expect(1).equals(obj2.a.b);
         expect(2).equals(obj3.a.b);
+    });
+
+    it('测试对象的所有属性赋值', function () {
+        let objA = {"X": "xx"};
+        let objB = {"A": "aa", "B": "bb", "C": 29};
+
+        objA = oh.assignDeeply(objA, objB);
+        console.log(objA);
+
+        let actualData = oh.getPropertyCount(objA);
+        let expectData = 4;
+        expect(actualData).equals(expectData);
     });
 });

@@ -345,8 +345,8 @@ function calcSignature(timeStamp, randomString, token = '') {
     //拼接成字符串
     let str = arr.join("");
     //进行加密
-    let signature = self.sha1(str);
-    signature = self.md5(signature);
+    let signature = sha1(str);
+    signature = hex_md5(signature);
     //转换成大写
     signature = signature.toUpperCase();
     return signature;
