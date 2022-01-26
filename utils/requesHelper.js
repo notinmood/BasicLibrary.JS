@@ -46,7 +46,7 @@ function request(url, settingObject = null, submitDataObject = null) {
  * @param bizObject 请求服务器过程的商务逻辑对象
  *      本对象包含以下成员:
  *      - funcName 调用服务器端函数的名称
- *      - funcParam 调用服务器端函数的参数,多个参数用 ^^ 分割的字符串或者直接传递仅有value没有key的数组,类似["zhangsan",20]
+ *      - funcParam 调用服务器端函数的参数,多个参数用 ^^ 分割的字符串或者直接传递仅有value(没有key)的数组,类似["zhangsan",20]
  *        (推荐做法:
  *        服务器端函数后面的括号内不直接写参数，而是在代码段内用 $_GET 或者 $_POST 接收参数;
  *        这样就不必使用 funcParam 给服务器函数传递多个参数的时候进行 ^^ 拼接了)
@@ -74,14 +74,13 @@ function requestBiz(url, bizObject, settingObject = null, submitDataObject = nul
      */
     ObjectHelper.assignDeeply(submitDataObject, bizObject);
 
-    let thisTime = Date.now();
-    let uuid = uuidHelper.create();
-    let sign = cipherHelper.calcSignature(thisTime, uuid);
-    submitDataObject['a__t'] = thisTime;
-    submitDataObject['a__r'] = uuid;
-    submitDataObject['a__s'] = sign;
+    let timeStamp = Date.now();
+    let randomString = uuidHelper.create();
+    let signature = cipherHelper.calcSignature(timeStamp, randomString);
+    submitDataObject['a__t'] = timeStamp;
+    submitDataObject['a__r'] = randomString;
+    submitDataObject['a__s'] = signature;
 
-    // params['MAN'] = config.miniAppNameEn;
     //TODO: 可以对 successFunc 进一步解析处理
 
     request(url, settingObject, submitDataObject);
