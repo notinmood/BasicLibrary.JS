@@ -1,10 +1,12 @@
-const jQuery = require("jquery");
+// const jQuery = require("jquery");
+const axios = require("axios");
 const ObjectHelper = require("./objectHelper");
 const uuidHelper = require("./uuidHelper");
 const cipherHelper = require("./cipherHelper");
 
 /**
  * 对服务器方法通用的请求方法
+ * @todo 在 axios 中暂时未处理 completeFunc 回调方法
  * @param url 请求的服务器地址(必选)
  * @param settingObject 请求服务器过程的信息设置对象(可以为 null)，
  *      本对象包含以下成员:
@@ -24,20 +26,31 @@ function request(url, settingObject = null, submitDataObject = null) {
         method = "POST";
     }
 
-    jQuery.ajax({
-                    type    : method,
-                    url     : url,
-                    data    : submitDataObject,
-                    success : function (serverResult) {
-                        typeof successFunc == 'function' && successFunc(serverResult);
-                    },
-                    error   : function (XMLHttpRequest, textStatus, errorThrown) {
-                        typeof errorFunc == 'function' && errorFunc(XMLHttpRequest, textStatus, errorThrown);
-                    },
-                    complete: function (XMLHttpRequest, textStatus) {
-                        typeof completeFunc == 'function' && completeFunc(XMLHttpRequest, textStatus);
-                    },
-                });
+    axios({
+              url   : url,
+              method: method,
+              data  : submitDataObject,
+          }).then((response) => {
+        typeof successFunc == 'function' && successFunc(response.data);
+    }).catch((reason) => {
+        console.log(reason.response);
+        typeof errorFunc == 'function' && errorFunc(reason.response);
+    });
+
+    // jQuery.ajax({
+    //                 type    : method,
+    //                 url     : url,
+    //                 data    : submitDataObject,
+    //                 success : function (serverResult) {
+    //                     typeof successFunc == 'function' && successFunc(serverResult);
+    //                 },
+    //                 error   : function (XMLHttpRequest, textStatus, errorThrown) {
+    //                     typeof errorFunc == 'function' && errorFunc(XMLHttpRequest, textStatus, errorThrown);
+    //                 },
+    //                 complete: function (XMLHttpRequest, textStatus) {
+    //                     typeof completeFunc == 'function' && completeFunc(XMLHttpRequest, textStatus);
+    //                 },
+    //             });
 }
 
 /**
