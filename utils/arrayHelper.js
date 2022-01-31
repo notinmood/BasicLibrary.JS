@@ -331,7 +331,7 @@ function _mergeElementProperty(mainArray, secondaryArray) {
 /**
  * 合并各个数组的元素
  * @param arrays
- * @returns {*[]}
+ * @returns []
  */
 function concat(...arrays) {
     let result = [];
@@ -360,7 +360,7 @@ function concat(...arrays) {
 /**
  * 合并各个数组的元素(concat的别名)
  * @param arrays
- * @returns {*[]}
+ * @returns []
  */
 function merge(...arrays) {
     return concat(...arrays);

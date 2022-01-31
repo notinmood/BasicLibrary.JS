@@ -167,7 +167,7 @@ Array.prototype.merge = function (...arrays) {
  * 重写系统内转子的concat方法
  * (重写后可以支持关联数组的合并)
  * @param arrays
- * @returns {*[]}
+ * @returns []
  */
 Array.prototype.concat = function (...arrays) {
     return ah.concat(this, ...arrays);

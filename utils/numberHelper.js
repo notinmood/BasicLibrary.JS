@@ -1,8 +1,8 @@
 const sh = require("./stringHelper");
 /**
  * 获取带精度的浮点数
- * @param value
- * @param precision {number} 获取结果的精度(默认2位小数精度)
+ * @param {number|string} value 待计算数值
+ * @param {number} precision  获取结果的精度(默认2位小数精度)
  * @returns {number|string}
  */
 function getFloat(value, precision = 2) {
