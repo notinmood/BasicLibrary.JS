@@ -94,7 +94,7 @@ function getStringAfterSeparator(whole, separator) {
 /**
  * 为了使用体验，将字符串中的占位符进行替代操作，例子如下：
  * format("Hi--2, {0}, '{1}',this is a '{0}'! ", name, 'uuu');
- * 【注意】现在统一使用ES6下的动态字符串表示方式 `hi,${name}`
+ * 【注意】现在统一使用 ES6 下的动态字符串表示方式 `hi,${name}`
  *   即，用反引号包裹目标字符串，字符串内的变量用 ${}包裹
  */
 function format() {
@@ -107,12 +107,22 @@ function format() {
 }
 
 /**
- * 把字符串whole按照给定的分隔符separator打散为数组
+ * 把字符串 whole 按照给定的分隔符 separator 打散为数组
  * @param {*} whole
  * @param {*} separator
  */
 function explode(whole, separator) {
     return whole.split(separator);
+}
+
+/**
+ * 将数组的各个元素组装为字符串（各个元素之间，置入分隔符 separator）
+ * @param {array} arrayData
+ * @param separator
+ * @returns {*}
+ */
+function implode(arrayData, separator = ",") {
+    return arrayData.join(separator);
 }
 
 /** 将小写的方法整理成辨识度高的方法，供项目调用
@@ -170,28 +180,41 @@ function convertTODateTime(stringData) {
  * @param {*} stringData
  */
 function isNumber(stringData) {
-    // return !isNaN(strData);
     return /^[-]?[\.\d]+$/.test(stringData);
 }
 
 /**
- * 获取count倍的stringData
+ * 获取 count 倍的 stringData
  * @param stringData
  * @param count
  * @returns {string}
  */
 function multi(stringData, count) {
-    let padding = '';
+    let result = '';
     for (let i = 0; i < count; i++) {
-        padding += stringData;
+        result += stringData;
     }
 
-    return padding;
+    return result;
+}
+
+/**
+ * 将一个字符串按照分隔符 ($oldDelimiter) 撕开，然后再用 $newDelimiter 进行缝合
+ * @param string $stringData
+ * @param string $oldDelimiter
+ * @param string $newDelimiter
+ * @return string
+ */
+function splice(stringData, oldDelimiter, newDelimiter = "") {
+    let tempArray = explode(stringData, oldDelimiter);
+    return implode(tempArray,newDelimiter);
 }
 
 module.exports = {
     format,
     explode,
+    implode,
+    splice,
     getSubString,
     reverse,
     right,

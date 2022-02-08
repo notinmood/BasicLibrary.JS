@@ -1,3 +1,5 @@
+const sh = require("./stringHelper");
+
 /**
  * 特别说明：JavaScript下最好不要使用关联数组，如果有这种需求就使用对象{}形式。
  */
@@ -162,10 +164,10 @@ function getArrayType(arrayData) {
 }
 
 const ArrayTypes = {
-    "index": "index",
+    "index"      : "index",
     "association": "association",
-    "hybrid": "hybrid",
-    "non": "non",
+    "hybrid"     : "hybrid",
+    "non"        : "non",
 }
 
 /**
@@ -366,8 +368,29 @@ function merge(...arrays) {
     return concat(...arrays);
 }
 
+/**
+ * 把字符串 stringData 按照给定的分隔符 separator 打散为数组
+ * @param {*} stringData
+ * @param {*} separator
+ */
+function explode(stringData, separator) {
+    return sh.explode(stringData, separator);
+}
+
+/**
+ * 将数组的各个元素组装为字符串（各个元素之间，置入分隔符 separator）
+ * @param {array} arrayData
+ * @param separator
+ * @returns {*}
+ */
+function implode(arrayData, separator = ",") {
+    return sh.implode(arrayData, separator);
+}
+
 module.exports = {
     ArrayTypes,
+    implode,
+    explode,
     merge,
     concat,
     hasMember,
