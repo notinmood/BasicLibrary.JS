@@ -29,7 +29,7 @@ const getType = function (data) {
     /**
      * 对undefined类型要先判断
      */
-    if (typeName == 'undefined') {
+    if (typeName === 'undefined') {
         return ObjectTypes.undefined;
     }
 
@@ -37,7 +37,7 @@ const getType = function (data) {
         return ObjectTypes.null;
     }
 
-    if (typeName == 'object') {
+    if (typeName === 'object') {
         const typeObject = Object.prototype.toString.call(data);
 
         switch (typeObject) {
@@ -70,7 +70,7 @@ const getType = function (data) {
  * @returns {boolean}
  */
 const isNumber = function (data) {
-    return getType(data) == ObjectTypes.number;
+    return getType(data) === ObjectTypes.number;
 }
 
 /**
@@ -79,7 +79,7 @@ const isNumber = function (data) {
  * @returns {boolean}
  */
 const isString = function (data) {
-    return getType(data) == ObjectTypes.string;
+    return getType(data) === ObjectTypes.string;
 }
 
 /**
@@ -88,7 +88,7 @@ const isString = function (data) {
  * @returns {boolean}
  */
 const isArray = function (data) {
-    return getType(data) == ObjectTypes.array;
+    return getType(data) === ObjectTypes.array;
 }
 
 /**
@@ -97,7 +97,7 @@ const isArray = function (data) {
  * @returns {boolean}
  */
 const isBoolean = function (data) {
-    return getType(data) == ObjectTypes.boolean;
+    return getType(data) === ObjectTypes.boolean;
 }
 
 /**
@@ -106,7 +106,7 @@ const isBoolean = function (data) {
  * @returns {boolean}
  */
 const isUndefined = function (data) {
-    return getType(data) == ObjectTypes.undefined;
+    return getType(data) === ObjectTypes.undefined;
 }
 
 /**
@@ -115,7 +115,7 @@ const isUndefined = function (data) {
  * @returns {boolean}
  */
 const isNull = function (data) {
-    return getType(data) == ObjectTypes.null;
+    return getType(data) === ObjectTypes.null;
 }
 
 /**
@@ -124,7 +124,7 @@ const isNull = function (data) {
  * @returns {boolean}
  */
 const isSymbol = function (data) {
-    return getType(data) == ObjectTypes.symbol;
+    return getType(data) === ObjectTypes.symbol;
 }
 
 /**
@@ -133,7 +133,7 @@ const isSymbol = function (data) {
  * @returns {boolean}
  */
 const isObject = function (data) {
-    return getType(data) == ObjectTypes.object;
+    return getType(data) === ObjectTypes.object;
 }
 
 /**
@@ -142,7 +142,7 @@ const isObject = function (data) {
  * @returns {boolean}
  */
 const isFunction = function (data) {
-    return getType(data) == ObjectTypes.function;
+    return getType(data) === ObjectTypes.function;
 }
 
 

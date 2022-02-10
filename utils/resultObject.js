@@ -65,13 +65,13 @@ module.exports = class ResultObject {
      */
     static parse = function (jsonData) {
         let typeInfo = th.getType(jsonData);
-        if (typeInfo == th.ObjectTypes.string) {
+        if (typeInfo === th.ObjectTypes.string) {
             jsonData = JSON.parse(jsonData);
             typeInfo = th.getType(jsonData);
         }
 
         let result = null;
-        if (typeInfo == th.ObjectTypes.object) {
+        if (typeInfo === th.ObjectTypes.object) {
             let status = oh.getMember(jsonData, 'status', false);
             let message = oh.getMember(jsonData, 'message', '');
             let data = oh.getMember(jsonData, 'data', null);

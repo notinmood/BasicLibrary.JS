@@ -21,19 +21,11 @@ let hasMember = function (objectData, memberName) {
     }
 
 
-    if (lastNode == defaultValue) {
-        return false;
-    } else {
-        return true;
-    }
+    return lastNode !== defaultValue;
 }
 
 let _hasMemberInner = function (objectData, memberName) {
-    if (memberName in objectData) {
-        return true;
-    } else {
-        return false;
-    }
+    return memberName in objectData;
 }
 
 /**
@@ -67,8 +59,8 @@ let _hasMemberInner = function (objectData, memberName) {
  p = app.util.getObjectMemberSafely(this.moo, "m2.n1.p");
  console.log(p(5));
  //调用moo的不存在的属性，返回的结果为第三个参数
- //（缺省值i am empty。如果不给指定明确的缺省值，那么返回null作为缺省值）
- p = app.util.getObjectMemberSafely(this.moo, "m2.n1.w", "i am empty");
+ //（缺省值 I am empty。如果不给指定明确的缺省值，那么返回 null 作为缺省值）
+ p = app.util.getObjectMemberSafely(this.moo, "m2.n1.w", "I am empty");
  console.log(p);
  */
 function getMember(targetObject, memberName, defaultValue = null) {

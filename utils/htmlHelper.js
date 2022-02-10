@@ -1,7 +1,7 @@
 /*1. 用正则表达式实现html转码*/
 htmlEncode = function (originalHTML) {
     let result = "";
-    if (originalHTML.length == 0) return "";
+    if (originalHTML.length === 0) return "";
     result = originalHTML.replace(/&/g, "&amp;");
     result = result.replace(/</g, "&lt;");
     result = result.replace(/>/g, "&gt;");
@@ -13,9 +13,9 @@ htmlEncode = function (originalHTML) {
 
 /*2. 用正则表达式实现html解码*/
 htmlDecode = function (encodedHTML) {
-    if (encodedHTML.length == 0) return "";
+    if (encodedHTML.length === 0) return "";
 
-    let result = "";
+    let result;
     result = encodedHTML.replace(/&amp;/g, "&");
     result = result.replace(/&lt;/g, "<");
     result = result.replace(/&gt;/g, ">");

@@ -30,27 +30,13 @@ function request(url, settingObject = null, submitDataObject = null) {
               url   : url,
               method: method,
               data  : submitDataObject,
-          }).then((response) => {
-        typeof successFunc == 'function' && successFunc(response.data);
-    }).catch((reason) => {
-        console.log(reason.response);
-        typeof errorFunc == 'function' && errorFunc(reason.response);
-    });
-
-    // jQuery.ajax({
-    //                 type    : method,
-    //                 url     : url,
-    //                 data    : submitDataObject,
-    //                 success : function (serverResult) {
-    //                     typeof successFunc == 'function' && successFunc(serverResult);
-    //                 },
-    //                 error   : function (XMLHttpRequest, textStatus, errorThrown) {
-    //                     typeof errorFunc == 'function' && errorFunc(XMLHttpRequest, textStatus, errorThrown);
-    //                 },
-    //                 complete: function (XMLHttpRequest, textStatus) {
-    //                     typeof completeFunc == 'function' && completeFunc(XMLHttpRequest, textStatus);
-    //                 },
-    //             });
+          })
+            .then((response) => {
+                typeof successFunc == 'function' && successFunc(response.data);
+            })
+            .catch((reason) => {
+                typeof errorFunc == 'function' && errorFunc(reason.response);
+            });
 }
 
 /**

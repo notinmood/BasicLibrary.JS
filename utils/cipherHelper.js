@@ -318,10 +318,9 @@ function sha1(s) {
     t = new DataView(new Uint32Array(m).buffer);
     for (let i = 0; i < 5; i++) m[i] = t.getUint32(i << 2);
 
-    let hex = Array.prototype.map.call(new Uint8Array(new Uint32Array(m).buffer), function (e) {
+    return Array.prototype.map.call(new Uint8Array(new Uint32Array(m).buffer), function (e) {
         return (e < 16 ? "0" : "") + e.toString(16);
     }).join("");
-    return hex;
 }
 
 /**

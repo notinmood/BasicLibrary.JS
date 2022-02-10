@@ -31,7 +31,7 @@ describe('数据类型测试', function () {
     });
 
     it("Function", function () {
-        const myData= function (){
+        const myData = function () {
 
         };
         expect(oh.getType(myData)).equals(oh.ObjectTypes.function);
@@ -54,6 +54,7 @@ describe('数据类型测试', function () {
 
     it("Undefined-2", function () {
         let nothing; //未赋值的变量
+        // noinspection all
         expect(oh.getType(nothing)).equals(oh.ObjectTypes.undefined);
     });
 
@@ -68,8 +69,8 @@ describe('数据类型测试', function () {
     });
 
     it('date 类型因为是object的子类,所以可以自由添加属性', function () {
-        let myDate= new Date();
-        myDate["mm"]= "foo";
+        let myDate = new Date();
+        myDate["mm"] = "foo";
 
         expect(myDate["mm"]).equals("foo");
     });

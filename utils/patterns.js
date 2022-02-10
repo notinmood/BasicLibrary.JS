@@ -3,7 +3,11 @@ let observer = {
     // 订阅集合
     subscribes: [],
 
-    // 订阅
+    /**
+     * 订阅
+     * @param type
+     * @param fn
+     */
     subscribe: function (type, fn) {
         if (!this.subscribes[type]) {
             this.subscribes[type] = [];
@@ -13,10 +17,12 @@ let observer = {
         typeof fn === 'function' && this.subscribes[type].push(fn);
     },
 
-    // 发布  可能会携带一些信息发布出去
+    /**
+     * 发布  可能会携带一些信息发布出去
+     */
     publish: function () {
         let type = [].shift.call(arguments),
-                fns = this.subscribes[type];
+            fns  = this.subscribes[type];
 
         // 不存在的订阅类型，以及订阅时未传入处理回调的
         if (!fns || !fns.length) {

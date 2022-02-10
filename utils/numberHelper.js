@@ -11,7 +11,7 @@ function getFloat(value, precision = 2) {
     const temp = parseInt("1" + paddingZeros);
     value = Math.round(parseFloat(value) * temp) / temp;
     let xsd = value.toString().split(".");
-    if (xsd.length == 1) {
+    if (xsd.length === 1) {
         value = value.toString() + "." + paddingZeros;
         return value;
     } else if (xsd.length > 1) {

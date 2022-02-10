@@ -1,10 +1,10 @@
 /**
  * 字符串转日期格式，dateString要转为日期格式的字符串
- * @param dateString
+ * @param {string} dateString
  * @returns {Date}
  */
 function getDate(dateString = "") {
-    let date = null;
+    let date;
 
     if (dateString) {
         date = new Date(dateString);
@@ -57,11 +57,10 @@ function format(date = null, formatter = "") {
     for (let k in opt) {
         ret = new RegExp("(" + k + ")").exec(formatter);
         if (ret) {
-            formatter = formatter.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
+            formatter = formatter.replace(ret[1], (ret[1].length === 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
         }
-        ;
     }
-    ;
+
     return formatter;
 }
 

@@ -5,6 +5,17 @@ const sh = require("./stringHelper");
  */
 
 /**
+ * 数组的类型（索引数组、关联数组、混合数组等）
+ * @type {{hybrid: string, index: string, association: string, non: string}}
+ */
+const ArrayTypes = {
+    "index"      : "index",
+    "association": "association",
+    "hybrid"     : "hybrid",
+    "non"        : "non",
+}
+
+/**
  * 判断是否存在某个元素成员(判断Value)
  * (不需要为关联数组和索引数组分别进行判断)
  * @param arrayData
@@ -161,13 +172,6 @@ function getArrayType(arrayData) {
     }
 
     return ArrayTypes.non;
-}
-
-const ArrayTypes = {
-    "index"      : "index",
-    "association": "association",
-    "hybrid"     : "hybrid",
-    "non"        : "non",
 }
 
 /**
@@ -370,8 +374,9 @@ function merge(...arrays) {
 
 /**
  * 把字符串 stringData 按照给定的分隔符 separator 打散为数组
- * @param {*} stringData
+ * @param {string} stringData
  * @param {*} separator
+ * @return {array}
  */
 function explode(stringData, separator) {
     return sh.explode(stringData, separator);
@@ -380,8 +385,8 @@ function explode(stringData, separator) {
 /**
  * 将数组的各个元素组装为字符串（各个元素之间，置入分隔符 separator）
  * @param {array} arrayData
- * @param separator
- * @returns {*}
+ * @param {string} separator
+ * @returns string
  */
 function implode(arrayData, separator = ",") {
     return sh.implode(arrayData, separator);

@@ -3,7 +3,6 @@ const ah = require("./arrayHelper");
 /**
  * 判断是否存在某个元素成员(判断Value)
  * (不需要为关联数组和索引数组分别进行判断)
- * @param arrayData
  * @param item
  * @returns {boolean}
  */
@@ -122,7 +121,6 @@ Array.prototype.mergeElementProperty = function (...arrays) {
 
 /**
  * 判断数组的类型(ArrayTypes值之一:索引数组、关联数组、混合数组)
- * @param arrayData
  * @returns {string}
  */
 Array.prototype.getArrayType = function () {
@@ -131,7 +129,6 @@ Array.prototype.getArrayType = function () {
 
 /**
  * 判断是否为索引数组
- * @param arrayData
  * @returns {boolean}
  */
 Array.prototype.isIndexArray = function () {
@@ -141,7 +138,6 @@ Array.prototype.isIndexArray = function () {
 
 /**
  * 判断是否为关联数组
- * @param arrayData
  * @returns {boolean}
  */
 Array.prototype.isAssociationArray = function () {
@@ -151,7 +147,6 @@ Array.prototype.isAssociationArray = function () {
 
 /**
  * 判断是否为混合了索引元素和关联元素的数组
- * @param arrayData
  * @returns {boolean}
  */
 Array.prototype.isHybridArray = function () {
@@ -175,7 +170,6 @@ Array.prototype.concat = function (...arrays) {
 
 /**
  * 是否存在某个Key
- * @param arrayData
  * @param keyName
  * @returns {boolean}
  */

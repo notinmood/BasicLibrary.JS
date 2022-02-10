@@ -6,10 +6,10 @@
  */
 const getSubString = function (whole, length, positive = true) {
     const realLength = whole.length;
-    let result = '';
+    let result;
     if (length >= realLength) {
         result = whole;
-    } else if (positive == true) {
+    } else if (positive === true) {
         result = whole.substring(0, length);
     } else {
         result = whole.substring(realLength - length, realLength);
@@ -50,10 +50,7 @@ const reverse = function (data) {
  */
 const isContains = function (whole, target) {
     const result = whole.indexOf(target);
-    if (result > -1) {
-        return true;
-    }
-    return false;
+    return result > -1;
 };
 
 /**
@@ -200,10 +197,10 @@ function multi(stringData, count) {
 
 /**
  * 将一个字符串按照分隔符 ($oldDelimiter) 撕开，然后再用 $newDelimiter 进行缝合
- * @param string $stringData
- * @param string $oldDelimiter
- * @param string $newDelimiter
- * @return string
+ * @param {string} stringData
+ * @param {string} oldDelimiter
+ * @param {string} newDelimiter
+ * @return {string}
  */
 function splice(stringData, oldDelimiter, newDelimiter = "") {
     let tempArray = explode(stringData, oldDelimiter);

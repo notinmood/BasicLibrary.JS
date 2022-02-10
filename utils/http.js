@@ -205,7 +205,7 @@ function _requestCommonApi(caller, funcName, funcParam, moreParams, method, call
         params = {};
     }
 
-    var url = '/index/Open/commonOperate4Client';
+    const url = '/index/Open/commonOperate4Client';
 
     let thisTime = Date.now();
     let uuid = uuidHelper.create();
