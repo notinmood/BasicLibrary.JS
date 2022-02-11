@@ -1,8 +1,9 @@
 const expect = require('chai').expect;
 const ah = require("../../utils/arrayHelper");
-const biz = require("../../utils/arrayInjector");
-const th = require("../../utils/typeHelper");
-const util = require("../../utils/util");
+
+require("../../utils/arrayInjector");
+require("../../utils/typeHelper");
+require("../../utils/util");
 
 let arrayIndex = [2, 4, 6, 8, 10];
 
@@ -14,7 +15,7 @@ arrayAssociation['c'] = "C";
 let arrayHybrid = [1, 2, 8];
 arrayHybrid["aa"] = "AA";
 
-describe("数组-测试", function () {
+describe("单元测试包-基本测试", function () {
     it("测试-hasKey-索引数组", function () {
         expect(arrayIndex.hasKey(2)).equals(true);
         expect(arrayIndex.hasKey(5)).equals(false);
@@ -79,7 +80,6 @@ describe("数组-测试", function () {
         expect(arrayHybrid.isHybridArray()).equals(true);
     });
 
-
     it("测试-getArrayType-索引数组", function () {
         expect(arrayIndex.getArrayType()).equals(ah.ArrayTypes.index);
     });
@@ -92,11 +92,60 @@ describe("数组-测试", function () {
         expect(arrayHybrid.getArrayType()).equals(ah.ArrayTypes.hybrid);
     });
 
+    it('单元测试方法 isEqual', function () {
+        let arrayData1 = [1, 2, 3, 4];
+        let arrayData2 = [1, 2, 3, 4];
+        let expectData = true;
+        let actualData = arrayData1.isEqual(arrayData2);
+        expect(actualData).equals(expectData);
 
+        arrayData1 = [1, 2, 3, 4];
+        arrayData2 = [1, 2, 3, 5];
+        expectData = false;
+        actualData = arrayData1.isEqual(arrayData2);
+        expect(actualData).equals(expectData);
+    });
 });
 
+describe("单元测试包-头尾操作测试", function () {
+    it("单元测试方法-addHead", function () {
+        let myArray = [1, 3, 5];
+        let actualData = myArray.addHead(0, 2);
+        let expectData = 5;
+        expect(actualData).equals(expectData);
 
-describe("数组合并-测试", function () {
+        actualData = myArray;
+        expectData = [0, 2, 1, 3, 5];
+        expect(actualData.toString()).equals(expectData.toString());
+    });
+
+    it('单元测试方法-removeHead', function () {
+        let myArray = [4, 3, 5];
+        let expectData = 4;
+        let actualData = myArray.removeHead();
+        expect(actualData).equals(expectData);
+    });
+
+    it("单元测试方法-addTail", function () {
+        let myArray = [1, 3, 5];
+        let actualData = myArray.addTail(0, 2);
+        let expectData = 5;
+        expect(actualData).equals(expectData);
+
+        actualData = myArray;
+        expectData = [1, 3, 5, 0, 2];
+        expect(actualData.toString()).equals(expectData.toString());
+    });
+
+    it('单元测试方法-removeTail', function () {
+        let myArray = [4, 3, 5];
+        let expectData = 5;
+        let actualData = myArray.removeTail();
+        expect(actualData).equals(expectData);
+    });
+});
+
+describe("单元测试包-数组合并测试", function () {
     it("测试-concat-索引数组", function () {
         const arrayA = [1, 3, 5];
         const arrayB = [3, 6, 9];

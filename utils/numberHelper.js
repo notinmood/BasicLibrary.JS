@@ -33,5 +33,5 @@ module.exports = {
     /**
      * 获取带精度的浮点数
      */
-    getFloat: getFloat,
+    getFloat,
 };

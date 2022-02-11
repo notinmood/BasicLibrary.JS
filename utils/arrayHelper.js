@@ -9,10 +9,7 @@ const sh = require("./stringHelper");
  * @type {{hybrid: string, index: string, association: string, non: string}}
  */
 const ArrayTypes = {
-    "index"      : "index",
-    "association": "association",
-    "hybrid"     : "hybrid",
-    "non"        : "non",
+    "index": "index", "association": "association", "hybrid": "hybrid", "non": "non",
 }
 
 /**
@@ -24,7 +21,7 @@ const ArrayTypes = {
  */
 function hasMember(arrayData, item) {
     for (const arrayDataKey in arrayData) {
-        if (arrayData[arrayDataKey] == item) {
+        if (arrayData[arrayDataKey] === item) {
             return true;
         }
     }
@@ -41,6 +38,7 @@ function hasMember(arrayData, item) {
 function hasKey(arrayData, keyName) {
     for (const arrayDataKey in arrayData) {
         if (arrayData.hasOwnProperty(arrayDataKey)) {
+            // noinspection all
             if (arrayDataKey == keyName) {
                 return true;
             }
@@ -65,7 +63,7 @@ function getCount(arrayData) {
  * @returns {number}
  * @private
  */
-function _getAllCount(arrayData) {
+function getAllCount(arrayData) {
     let inCount = 0;
     for (const myArrayKey in arrayData) {
         inCount++;
@@ -114,11 +112,7 @@ function isIndexArray(arrayData) {
     const indexCount = _getIndexCount(arrayData);
     const selfCount = _getSelfCount(arrayData);
 
-    if (indexCount != 0 && indexCount == selfCount) {
-        return true;
-    } else {
-        return false;
-    }
+    return indexCount !== 0 && indexCount === selfCount;
 }
 
 /**
@@ -130,11 +124,7 @@ function isAssociationArray(arrayData) {
     const indexCount = _getIndexCount(arrayData);
     const selfCount = _getSelfCount(arrayData);
 
-    if (indexCount == 0 && selfCount != 0) {
-        return true;
-    } else {
-        return false;
-    }
+    return indexCount === 0 && selfCount !== 0;
 }
 
 /**
@@ -146,10 +136,39 @@ function isHybridArray(arrayData) {
     const indexCount = _getIndexCount(arrayData);
     const selfCount = _getSelfCount(arrayData);
 
-    if (indexCount != 0 && indexCount != selfCount) {
+    return indexCount !== 0 && indexCount !== selfCount;
+}
+
+/**
+ * 判断 2个数组是否相等
+ * @param arrayData1
+ * @param arrayData2
+ * @return {boolean}
+ */
+function isEqual(arrayData1, arrayData2) {
+    /**
+     * 如果2个数组对应的指针相同，那么肯定相等，同时也对比一下类型
+     */
+    if (arrayData1 === arrayData2) {
         return true;
     } else {
-        return false;
+        if (arrayData1.length !== arrayData2.length) {
+            return false;
+        } else {
+            for (let i in arrayData1) {
+                /**
+                 * 只要出现一次不相等，那么2个数组就不相等
+                 */
+                if (arrayData1[i] !== arrayData2[i]) {
+                    return false;
+                }
+            }
+
+            /**
+             * for循环完成，没有出现不相等的情况，那么2个数组相等
+             */
+            return true;
+        }
     }
 }
 
@@ -219,7 +238,7 @@ function _sortByPropertyLength(propName, sortOrder = "ASC") {
 }
 
 function _sortTwoValue(val1, val2, sortOrder = "ASC") {
-    let result = 0;
+    let result;
     if (val1 < val2) {
         result = -1;
     } else if (val1 > val2) {
@@ -229,7 +248,7 @@ function _sortTwoValue(val1, val2, sortOrder = "ASC") {
     }
 
     sortOrder = sortOrder.toLowerCase();
-    if (sortOrder == "desc") {
+    if (sortOrder === "desc") {
         result = 0 - result;
     }
 
@@ -392,10 +411,49 @@ function implode(arrayData, separator = ",") {
     return sh.implode(arrayData, separator);
 }
 
+/**
+ * 将元素添加到数组的头部
+ * @param {array} arrayData
+ * @param items
+ * @return {int} 返回数组新的长度
+ */
+function addHead(arrayData, ...items) {
+    return arrayData.unshift(...items);
+}
+
+/**
+ * 获取数组的头部元素并将其从数组内移除
+ * @param  {array} arrayData
+ * @return {*} 返回数组的头部元素
+ */
+function removeHead(arrayData) {
+    return arrayData.shift();
+}
+
+/**
+ * 将元素添加到数组的尾部
+ * @param {array} arrayData
+ * @param items
+ * @return {int} 返回数组新的长度
+ */
+function addTail(arrayData, ...items) {
+    return arrayData.push(...items);
+}
+
+/**
+ * 获取数组的尾部元素并将其从数组内移除
+ * @param  {array} arrayData
+ * @return {any}
+ */
+function removeTail(arrayData) {
+    return arrayData.pop();
+}
+
 module.exports = {
     ArrayTypes,
     implode,
     explode,
+
     merge,
     concat,
     hasMember,
@@ -404,8 +462,15 @@ module.exports = {
     sortByPropertyLength,
     mergeElementProperty,
     getCount,
+    getAllCount,
     getArrayType,
     isIndexArray,
     isAssociationArray,
     isHybridArray,
+    isEqual,
+
+    addHead,
+    removeHead,
+    addTail,
+    removeTail,
 }

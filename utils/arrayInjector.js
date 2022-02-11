@@ -1,4 +1,5 @@
 const ah = require("./arrayHelper");
+const sh = require("./stringHelper");
 
 /**
  * 判断是否存在某个元素成员(判断Value)
@@ -175,4 +176,57 @@ Array.prototype.concat = function (...arrays) {
  */
 Array.prototype.hasKey = function (keyName) {
     return ah.hasKey(this, keyName);
+}
+
+/**
+ * 将元素添加到数组的头部
+ * @param items
+ * @return {int} 返回数组新的长度
+ */
+Array.prototype.addHead = function (...items) {
+    return ah.addHead(this, ...items);
+}
+
+/**
+ * 获取数组的头部元素并将其从数组内移除
+ * @return {*} 返回数组的头部元素
+ */
+Array.prototype.removeHead = function () {
+    return ah.removeHead(this);
+}
+
+/**
+ * 将元素添加到数组的尾部
+ * @param items
+ * @return {int} 返回数组新的长度
+ */
+Array.prototype.addTail = function (...items) {
+    return ah.addTail(this, ...items);
+}
+
+/**
+ * 获取数组的尾部元素并将其从数组内移除
+ * @return {any}
+ */
+Array.prototype.removeTail = function () {
+    return ah.removeTail(this);
+}
+
+
+/**
+ * 将数组的各个元素组装为字符串（各个元素之间，置入分隔符 separator）
+ * @param {string} separator
+ * @returns string
+ */
+Array.prototype.implode = function (separator = ",") {
+    return ah.implode(this, separator);
+}
+
+/**
+ * 判断 2个数组是否相等
+ * @param {Array} arrayDataOther
+ * @return {boolean}
+ */
+Array.prototype.isEqual = function (arrayDataOther) {
+    return ah.isEqual(this, arrayDataOther);
 }
