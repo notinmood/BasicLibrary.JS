@@ -148,9 +148,41 @@ function getMemberCount(targetObject){
    return Object.getOwnPropertyNames(targetObject).length;
 }
 
+/**
+ * 两个对象内容成员相等性的判断
+ * @param objectA
+ * @param objectB
+ * @return {boolean}
+ */
+function isValueEqual(objectA, objectB) {
+    // 判断两个对象是否指向同一内存，指向同一内存返回true
+    if (objectA === objectB) return true
+    // 获取两个对象键值数组
+    let aProps = Object.getOwnPropertyNames(objectA)
+    let bProps = Object.getOwnPropertyNames(objectB)
+    // 判断两个对象键值数组长度是否一致，不一致返回false
+    if (aProps.length !== bProps.length) return false
+    // 遍历对象的键值
+    for (let prop in objectA) {
+        // 判断a的键值，在b中是否存在，不存在，返回false
+        if (objectB.hasOwnProperty(prop)) {
+            // 判断a的键值是否为对象，是则递归，不是对象直接判断键值是否相等，不相等返回false
+            if (typeof objectA[prop] === 'object') {
+                if (!isValueEqual(objectA[prop], objectB[prop])) return false
+            } else if (objectA[prop] !== objectB[prop]) {
+                return false
+            }
+        } else {
+            return false
+        }
+    }
+    return true
+}
+
 module.exports = {
     hasMember,
     getMember,
     assignDeeply,
     getMemberCount,
+    isValueEqual,
 }

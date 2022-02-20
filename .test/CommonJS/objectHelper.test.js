@@ -72,10 +72,50 @@ describe("其他复杂方法的测试", function () {
         let objB = {"A": "aa", "B": "bb", "C": 29};
 
         objA = oh.assignDeeply(objA, objB);
-        // console.log(objA);
 
         let actualData = oh.getMemberCount(objA);
         let expectData = 4;
+        expect(actualData).equals(expectData);
+    });
+});
+
+
+describe("单元测试包名称", function () {
+    it("单元测试方法 对象值相等1", function () {
+        let obj1 = {
+            a: 1,
+            b: {
+                c: 2
+            },
+        };
+        let obj2 = {
+            b: {
+                c: 2
+            },
+            a: 1,
+        };
+
+        let expectData = true;
+        let actualData = oh.isValueEqual(obj1, obj2);
+        expect(actualData).equals(expectData);
+    });
+
+    it("单元测试方法 对象值相等2", function () {
+        let obj1 = {
+            a: 1,
+            b: {
+                c: 2
+            }
+        };
+        let obj2 = {
+            b: {
+                c: 3
+            },
+            a: 1
+        };
+
+        let expectData = false;
+        let actualData = oh.isValueEqual(obj1, obj2);
         expect(actualData).equals(expectData);
     });
 });
