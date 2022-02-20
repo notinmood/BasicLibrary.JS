@@ -1,5 +1,5 @@
-const oh = require("./objectHelper");
-const th = require("./typeHelper");
+const oh = require("../data/objectHelper");
+const th = require("../data/typeHelper");
 
 /**
  * 本文件返回class本身,使用的时候可以直接调用

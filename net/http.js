@@ -1,9 +1,9 @@
-const miniapp = require('./miniapp.js');
-const util = require("./util.js");
-const cipher = require("./cipherHelper.js");
+const miniapp = require('../utils/miniapp.js');
+const util = require("../utils/util.js");
+const cipher = require("../utils/cipherHelper.js");
 const config = require("../config.js");
-const jsonHelper = require("./jsonHelper.js");
-const uuidHelper = require("./uuidHelper.js");
+const jsonHelper = require("../data/jsonHelper.js");
+const uuidHelper = require("../data/uuidHelper.js");
 
 
 /**

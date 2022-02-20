@@ -1,8 +1,8 @@
 // const jQuery = require("jquery");
 const axios = require("axios");
-const ObjectHelper = require("./objectHelper");
-const uuidHelper = require("./uuidHelper");
-const cipherHelper = require("./cipherHelper");
+const ObjectHelper = require("../data/objectHelper");
+const uuidHelper = require("../data/uuidHelper");
+const cipherHelper = require("../utils/cipherHelper");
 
 /**
  * 对服务器方法通用的请求方法

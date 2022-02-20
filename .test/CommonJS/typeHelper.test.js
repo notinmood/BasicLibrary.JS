@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const oh = require("../../utils/typeHelper");
+const oh = require("../../data/typeHelper");
 const st = require("../_res/Student");
 
 

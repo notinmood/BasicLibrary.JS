@@ -12,7 +12,7 @@
 // |思路说明 |2. 运行后，控制台应该出现 "I am lisi, my age is 20",表示请求成功。
 // +--------------------------------------------------------------------------
 
-const rh = require("../../utils/requestHelper");
+const rh = require("../../net/requestHelper");
 
 
 let url = "http://localhost/diyipingce/index.php/open/getecho";

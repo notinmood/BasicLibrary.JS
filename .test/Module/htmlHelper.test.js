@@ -1,4 +1,4 @@
-import {helper as hh} from "../../utils/htmlHelper.mjs"
+import {helper as hh} from "../../data/htmlHelper.mjs"
 import {expect} from "chai";
 
 

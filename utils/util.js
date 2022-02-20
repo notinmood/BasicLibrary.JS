@@ -1,6 +1,6 @@
-const th = require("./typeHelper");
-const ah = require("./arrayHelper");
-const oh = require("./objectHelper");
+const th = require("../data/typeHelper");
+const ah = require("../data/arrayHelper");
+const oh = require("../data/objectHelper");
 
 /**
  * 获取Array,string等对象中元素的个数

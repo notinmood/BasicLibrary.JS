@@ -8,7 +8,7 @@
  */
 
 const expect = require('chai').expect;
-const sh = require("../../utils/stringHelper");
+const sh = require("../../data/stringHelper");
 
 
 describe("字符串测试", function () {

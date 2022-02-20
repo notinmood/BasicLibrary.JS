@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-require("../../utils/stringInjector");
+require("../../data/stringInjector");
 
 
 let original = "我是一个中国人！";

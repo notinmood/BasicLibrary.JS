@@ -1,5 +1,5 @@
 import {expect} from "chai";
-import {helper} from "../../utils/numberHelper.mjs";
+import {helper} from "../../data/numberHelper.mjs";
 
 describe("数字逻辑-测试", function () {
     const myData = 1234.5678;

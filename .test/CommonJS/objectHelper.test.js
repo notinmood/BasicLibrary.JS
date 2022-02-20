@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const oh = require("../../utils/objectHelper");
+const oh = require("../../data/objectHelper");
 const st = require("../_res/Student");
 const {getLength} = require("../../utils/util");
 
@@ -72,9 +72,9 @@ describe("其他复杂方法的测试", function () {
         let objB = {"A": "aa", "B": "bb", "C": 29};
 
         objA = oh.assignDeeply(objA, objB);
-        console.log(objA);
+        // console.log(objA);
 
-        let actualData = oh.getPropertyCount(objA);
+        let actualData = oh.getMemberCount(objA);
         let expectData = 4;
         expect(actualData).equals(expectData);
     });

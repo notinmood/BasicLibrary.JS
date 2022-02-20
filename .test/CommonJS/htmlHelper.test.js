@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const hh = require("../../utils/htmlHelper");
+const hh = require("../../data/htmlHelper");
 
 describe("HTML功能测试", function () {
     it("测试HTML编码", function () {
