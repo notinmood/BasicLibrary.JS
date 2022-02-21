@@ -95,5 +95,11 @@ describe("字符串测试", function () {
         let actualData = sh.trimBoth(stringData, ". ");
         expect(actualData).equals(expectData);
     });
+
+    it('单元测试方法名称 format', function () {
+        let expectData = "欢迎刘省长到qingdao视察！";
+        let actualData = sh.format("欢迎{0}到{1}视察！", "刘省长", "qingdao");
+        expect(actualData).equals(expectData);
+    });
 });
 

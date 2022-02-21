@@ -108,19 +108,25 @@ function getStringAfterSeparator(wholeString, separator) {
     return wholeString;
 }
 
+
 /**
  * 为了使用体验，将字符串中的占位符进行替代操作，例子如下：
  * format("Hi--2, {0}, '{1}',this is a '{0}'! ", name, 'uuu');
  * 【注意】现在统一使用 ES6 下的动态字符串表示方式 `hi,${name}`
  *   即，用反引号包裹目标字符串，字符串内的变量用 ${}包裹
+ * @param {string} placeHeldString 带占位符 {i} 的字符串
+ * @param placeHolders
+ * @return {*}
  */
-function format() {
-    let s = arguments[0];
-    for (let i = 0; i < arguments.length - 1; i++) {
-        const reg = new RegExp(`\\{${i}\\}`, 'gm');
-        s = s.replace(reg, arguments[i + 1]);
+function format(placeHeldString, ...placeHolders) {
+    if (placeHolders) {
+        for (let i = 0; i < placeHolders.length; i++) {
+            const reg = new RegExp(`\\{${i}\\}`, 'gm');
+            placeHeldString = placeHeldString.replace(reg, placeHolders[i]);
+        }
     }
-    return s;
+
+    return placeHeldString;
 }
 
 /**
