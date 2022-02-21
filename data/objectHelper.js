@@ -150,9 +150,11 @@ function getMemberCount(targetObject){
 
 /**
  * 两个对象内容成员相等性的判断
- * @param objectA
- * @param objectB
+ * @param {Object} objectA 待比较对象 a
+ * @param  {Object} objectB  待比较对象 b
  * @return {boolean}
+ * @link https://www.jb51.net/article/178180.htm
+ * @link https://www.jb51.net/article/110768.htm
  */
 function isValueEqual(objectA, objectB) {
     // 判断两个对象是否指向同一内存，指向同一内存返回true
