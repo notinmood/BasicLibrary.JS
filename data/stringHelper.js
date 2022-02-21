@@ -1,91 +1,111 @@
 /**
  * 截取某个字符串的子字符串
- * @param {*} whole 待截取的全字符串
+ * @param {*} wholeString 待截取的全字符串
  * @param {*} length 截取长度
  * @param {*} positive 截取方向（true表示正向，false表示反向）
  */
-const getSubString = function (whole, length, positive = true) {
-    const realLength = whole.length;
+const getSubString = function (wholeString, length, positive = true) {
+    const realLength = wholeString.length;
     let result;
     if (length >= realLength) {
-        result = whole;
+        result = wholeString;
     } else if (positive === true) {
-        result = whole.substring(0, length);
+        result = wholeString.substring(0, length);
     } else {
-        result = whole.substring(realLength - length, realLength);
+        result = wholeString.substring(realLength - length, realLength);
     }
     return result;
 };
 
 /**
  * 从右向左截取字符串
- * @param {*} whole
+ * @param {*} wholeString
  * @param {*} length
  */
-const right = function (whole, length) {
-    return getSubString(whole, length, false);
+const right = function (wholeString, length) {
+    return getSubString(wholeString, length, false);
 };
 
 /**
  * 从左向右截取字符串
- * @param {*} whole
+ * @param {*} wholeString
  * @param {*} length
  */
-const left = function (whole, length) {
-    return getSubString(whole, length, true);
+const left = function (wholeString, length) {
+    return getSubString(wholeString, length, true);
 };
 
 /**
  * 将字符串进行方向反转
- * @param {*} data 待反转的字符串
+ * @param {*} stringData 待反转的字符串
  */
-const reverse = function (data) {
-    return data.split('').reverse().join('');
+const reverse = function (stringData) {
+    return stringData.split('').reverse().join('');
 };
 
 /**
  * 判断一个字符串是否包含另外一个子字符串
- * @param {*} whole 全字符串
+ * @param {*} wholeString 全字符串
  * @param {*} target 被包含的子字符串
  */
-const isContains = function (whole, target) {
-    const result = whole.indexOf(target);
+const isContains = function (wholeString, target) {
+    const result = wholeString.indexOf(target);
     return result > -1;
 };
 
 /**
+ * 判断字符串是否以某个子字符串结尾
+ * @param wholeString
+ * @param target
+ * @return {boolean}
+ */
+function isEndWith(wholeString, target) {
+    return wholeString.endsWith(target);
+}
+
+/**
+ * 判断字符串是否以某个子字符串开始
+ * @param wholeString
+ * @param target
+ * @return {boolean}
+ */
+function isStartWith(wholeString, target) {
+    return wholeString.startsWith(target);
+}
+
+/**
  * 获取子字符串出现的位置
- * @param {*} whole
+ * @param {*} wholeString
  * @param {*} target
  */
-const getPosition = function (whole, target) {
-    return whole.indexOf(target);
+const getPosition = function (wholeString, target) {
+    return wholeString.indexOf(target);
 };
 
 /**
  * 获取分隔符之前的子字符串
- * @param {*} whole
+ * @param {*} wholeString
  * @param {*} separator
  */
-function getStringBeforeSeparator(whole, separator) {
-    if (isContains(whole, separator)) {
-        const pos = getPosition(whole, separator);
-        return whole.substring(0, pos);
+function getStringBeforeSeparator(wholeString, separator) {
+    if (isContains(wholeString, separator)) {
+        const pos = getPosition(wholeString, separator);
+        return wholeString.substring(0, pos);
     }
-    return whole;
+    return wholeString;
 }
 
 /**
  * 获取分隔符之后的子字符串
- * @param {*} whole
+ * @param {*} wholeString
  * @param {*} separator
  */
-function getStringAfterSeparator(whole, separator) {
-    if (isContains(whole, separator)) {
-        const pos = getPosition(whole, separator) + 1;
-        return whole.substring(pos);
+function getStringAfterSeparator(wholeString, separator) {
+    if (isContains(wholeString, separator)) {
+        const pos = getPosition(wholeString, separator) + 1;
+        return wholeString.substring(pos);
     }
-    return whole;
+    return wholeString;
 }
 
 /**
@@ -105,11 +125,11 @@ function format() {
 
 /**
  * 把字符串 whole 按照给定的分隔符 separator 打散为数组
- * @param {*} whole
+ * @param {*} wholeString
  * @param {*} separator
  */
-function explode(whole, separator) {
-    return whole.split(separator);
+function explode(wholeString, separator) {
+    return wholeString.split(separator);
 }
 
 /**
@@ -204,7 +224,42 @@ function multi(stringData, count) {
  */
 function splice(stringData, oldDelimiter, newDelimiter = "") {
     let tempArray = explode(stringData, oldDelimiter);
-    return implode(tempArray,newDelimiter);
+    return implode(tempArray, newDelimiter);
+}
+
+/**
+ * 移除字符串内所有的空格
+ * @param stringData
+ * @return {*}
+ */
+function removeAllSpace(stringData) {
+    return stringData.replace(/(\s*)/g, "");
+}
+
+function trimLeft(stringData, target = " ") {
+    let targetLength = target.length;
+
+    if (stringData.substring(0, targetLength) == target) {
+        stringData = stringData.slice(target.length);//将空格从字串中去掉
+        stringData = trimLeft(stringData, target);    //递归调用
+    }
+    return stringData;
+}
+
+function trimRight(stringData, target = " ") {
+    let allLength = stringData.length;
+    let targetLength = target.length;
+    if (stringData.substring(allLength - targetLength) == target) {
+        //如果字串右边第一个字符为空格
+        stringData = stringData.slice(0, allLength - targetLength);//将空格从字串中去掉
+        stringData = trimRight(stringData, target);    //递归调用
+    }
+    return stringData;
+}
+
+trimBoth = function (stringData, target = " ") {
+    let temp = trimLeft(stringData, target);
+    return trimRight(temp, target);
 }
 
 module.exports = {
@@ -232,4 +287,11 @@ module.exports = {
     convertToFloat,
     convertToBool,
     convertTODateTime,
+
+    isEndWith,
+    isStartWith,
+    removeAllSpace,
+    trimLeft,
+    trimRight,
+    trimBoth,
 };
