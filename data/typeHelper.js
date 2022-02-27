@@ -4,18 +4,18 @@
  */
 
 const ObjectTypes = {
-    null: 'null',
-    string: 'string',
-    date: 'date',
-    boolean: 'boolean',
+    null     : 'null',
+    string   : 'string',
+    date     : 'date',
+    boolean  : 'boolean',
     undefined: 'undefined',
-    function: 'function',
-    number: 'number',
-    array: 'array',
-    symbol: 'symbol',
-    error: 'error',
-    regexp: 'regexp',
-    object: 'object',
+    function : 'function',
+    number   : 'number',
+    array    : 'array',
+    symbol   : 'symbol',
+    error    : 'error',
+    regexp   : 'regexp',
+    object   : 'object',
 };
 
 /**
@@ -145,6 +145,31 @@ const isFunction = function (data) {
     return getType(data) === ObjectTypes.function;
 }
 
+/**
+ * 判断给定的数据是否为引用类型
+ * @param value
+ * @return {boolean}
+ */
+function isReferenceType(value) {
+    /**
+     * 必须使用 === 严格相等（否则 undefined==null）
+     */
+    if (value === null) {
+        return true;
+    }
+
+    return value instanceof Object;
+}
+
+/**
+ * 判断给定的数据是否为值类型
+ * @param value
+ * @return {boolean}
+ */
+function isValueType(value){
+    return !isReferenceType(value);
+}
+
 
 module.exports = {
     ObjectTypes,
@@ -158,4 +183,6 @@ module.exports = {
     isSymbol,
     isObject,
     isFunction,
+    isReferenceType,
+    isValueType,
 };

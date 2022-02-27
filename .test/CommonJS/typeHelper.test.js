@@ -1,71 +1,71 @@
 const expect = require('chai').expect;
-const oh = require("../../data/typeHelper");
+const th = require("../../data/typeHelper");
 const st = require("../_res/Student");
 
 
 describe('数据类型测试', function () {
 
     it("Number-n", function () {
-        expect(oh.getType(123.45)).equals(oh.ObjectTypes.number);
+        expect(th.getType(123.45)).equals(th.ObjectTypes.number);
     });
 
     it("Number-0", function () {
-        expect(oh.getType(0)).equals(oh.ObjectTypes.number);
+        expect(th.getType(0)).equals(th.ObjectTypes.number);
     });
 
     it("String", function () {
-        expect(oh.getType("123.45")).equals(oh.ObjectTypes.string);
+        expect(th.getType("123.45")).equals(th.ObjectTypes.string);
     });
 
     it("Null", function () {
         const myNull = null;
-        expect(oh.getType(myNull)).equals(oh.ObjectTypes.null);
+        expect(th.getType(myNull)).equals(th.ObjectTypes.null);
     });
 
     it("Boolean-true", function () {
-        expect(oh.getType(true)).equals(oh.ObjectTypes.boolean);
+        expect(th.getType(true)).equals(th.ObjectTypes.boolean);
     });
 
     it("Boolean-false", function () {
-        expect(oh.getType(false)).equals(oh.ObjectTypes.boolean);
+        expect(th.getType(false)).equals(th.ObjectTypes.boolean);
     });
 
     it("Function", function () {
         const myData = function () {
 
         };
-        expect(oh.getType(myData)).equals(oh.ObjectTypes.function);
+        expect(th.getType(myData)).equals(th.ObjectTypes.function);
     });
 
     it("Array", function () {
         const myArray = [];
-        expect(oh.getType(myArray)).equals(oh.ObjectTypes.array);
+        expect(th.getType(myArray)).equals(th.ObjectTypes.array);
     });
 
     it("Date", function () {
         const myDate = new Date();
-        expect(oh.getType(myDate)).equals(oh.ObjectTypes.date);
+        expect(th.getType(myDate)).equals(th.ObjectTypes.date);
     });
 
     it("Undefined-1", function () {
         const nothing = undefined;
-        expect(oh.getType(nothing)).equals(oh.ObjectTypes.undefined);
+        expect(th.getType(nothing)).equals(th.ObjectTypes.undefined);
     });
 
     it("Undefined-2", function () {
         let nothing; //未赋值的变量
         // noinspection all
-        expect(oh.getType(nothing)).equals(oh.ObjectTypes.undefined);
+        expect(th.getType(nothing)).equals(th.ObjectTypes.undefined);
     });
 
     it("Object-simple", function () {
         const myObject = {};
-        expect(oh.getType(myObject)).equals(oh.ObjectTypes.object);
+        expect(th.getType(myObject)).equals(th.ObjectTypes.object);
     });
 
     it("Object-standard", function () {
         const myObject = new st.Student();
-        expect(oh.getType(myObject)).equals(oh.ObjectTypes.object);
+        expect(th.getType(myObject)).equals(th.ObjectTypes.object);
     });
 
     it('date 类型因为是object的子类,所以可以自由添加属性', function () {
@@ -73,5 +73,74 @@ describe('数据类型测试', function () {
         myDate["mm"] = "foo";
 
         expect(myDate["mm"]).equals("foo");
+    });
+});
+
+describe("单元测试包名称 类型模式判断", function () {
+    it("单元测试方法名称 number", function () {
+        let expectData = false;
+        let actualData = th.isReferenceType(123);
+        expect(actualData).equals(expectData);
+    });
+
+    it("单元测试方法名称 string", function () {
+        let expectData = false;
+        let actualData = th.isReferenceType("123");
+        expect(actualData).equals(expectData);
+    });
+
+    it("单元测试方法名称 bool", function () {
+        let expectData = false;
+        let actualData = th.isReferenceType(true);
+        expect(actualData).equals(expectData);
+    });
+
+    it("单元测试方法名称 undefined1", function () {
+        let expectData = false;
+        let actualData = th.isReferenceType(undefined);
+        expect(actualData).equals(expectData);
+    });
+
+    it("单元测试方法名称 undefined2", function () {
+        let expectData = true;
+        let actualData = th.isValueType(undefined);
+        expect(actualData).equals(expectData);
+    });
+
+    it("单元测试方法名称 function", function () {
+        let expectData = true;
+        let actualData = th.isReferenceType(function doSomething() {
+        });
+        expect(actualData).equals(expectData);
+    });
+
+    it("单元测试方法名称 Date", function () {
+        let expectData = true;
+        let actualData = th.isReferenceType(new Date());
+        expect(actualData).equals(expectData);
+    });
+
+    it("单元测试方法名称 object", function () {
+        let expectData = true;
+        let actualData = th.isReferenceType({});
+        expect(actualData).equals(expectData);
+    });
+
+    it("单元测试方法名称 array", function () {
+        let expectData = true;
+        let actualData = th.isReferenceType([]);
+        expect(actualData).equals(expectData);
+    });
+
+    it("单元测试方法名称 null", function () {
+        let expectData = true;
+        let actualData = th.isReferenceType(null);
+        expect(actualData).equals(expectData);
+    });
+
+    it("单元测试方法名称 new", function () {
+        let expectData = true;
+        let actualData = th.isReferenceType(new Number(123));
+        expect(actualData).equals(expectData);
     });
 });

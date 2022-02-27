@@ -43,9 +43,9 @@ import {} from "../utils/stringInjector.mjs";
     
     let all = {nh, ah};
     
-    window._bl_ = all;
+    window.$bl = all;
     window.$ = jQuery;
     ```
    2. 用webpack转换这个 main.js 为 bundle.js
    3. 然后再HTML页面引用这个 bundle.js
-   4. 在HTML页面内可以通过 `_bl_` 继续使用包含的类型和方法 
+   4. 在HTML页面内可以通过 `$bl` 继续使用包含的类型和方法 
