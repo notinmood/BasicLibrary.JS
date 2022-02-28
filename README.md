@@ -1,5 +1,5 @@
-说明
---
+# 说明
+
 ## 文档组织说明
 1. 本项目大部分类库采用函数库的方式，是函数式编程思想的体现
 2. 本项目使用 WebStorm 打开进行编辑
@@ -8,12 +8,12 @@
 5. .demoPages 是手工测试页面的目录;.test 是单元测试测试框架自动测试的目录。
 6. data、utils 等各个目录是本项目的类库功能区域
 
-## 发布说明
+## 产品发布说明
 1. 打开 package.json 找到 version 进行修改
 2. 提交并推送代码到 github
 3. 打开终端窗口，执行 npm publish
 
-## 使用说明
+## 项目使用说明
 本类库兼容 commonjs 和 module(ES)
 1. 目标项目如果采用 CommonJS 方式组织代码，调用的时候在 package.json 内请配置 `"type": "commonjs"`,引用类库的方式如下
 ```shell
