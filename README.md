@@ -1,5 +1,11 @@
 # 企业级的 JavaScript 类库
 
+```shell
+@creator: ShanDong Xiedali
+@emailto: 9727005@qq.com
+@company: HiLand & RainyTop
+```
+
 ## 文档组织说明
 1. 本项目大部分类库采用函数库的方式，是函数式编程思想的体现
 2. 本项目使用 WebStorm 打开进行编辑
