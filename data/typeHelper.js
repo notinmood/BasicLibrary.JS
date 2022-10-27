@@ -4,18 +4,18 @@
  */
 
 const ObjectTypes = {
-    null     : 'null',
-    string   : 'string',
-    date     : 'date',
-    boolean  : 'boolean',
+    null: 'null',
+    string: 'string',
+    date: 'date',
+    boolean: 'boolean',
     undefined: 'undefined',
-    function : 'function',
-    number   : 'number',
-    array    : 'array',
-    symbol   : 'symbol',
-    error    : 'error',
-    regexp   : 'regexp',
-    object   : 'object',
+    function: 'function',
+    number: 'number',
+    array: 'array',
+    symbol: 'symbol',
+    error: 'error',
+    regexp: 'regexp',
+    object: 'object',
 };
 
 /**
@@ -71,7 +71,7 @@ const getType = function (data) {
  */
 const isNumber = function (data) {
     return getType(data) === ObjectTypes.number;
-}
+};
 
 /**
  *
@@ -80,7 +80,7 @@ const isNumber = function (data) {
  */
 const isString = function (data) {
     return getType(data) === ObjectTypes.string;
-}
+};
 
 /**
  *
@@ -89,7 +89,7 @@ const isString = function (data) {
  */
 const isArray = function (data) {
     return getType(data) === ObjectTypes.array;
-}
+};
 
 /**
  *
@@ -98,7 +98,7 @@ const isArray = function (data) {
  */
 const isBoolean = function (data) {
     return getType(data) === ObjectTypes.boolean;
-}
+};
 
 /**
  *
@@ -107,7 +107,7 @@ const isBoolean = function (data) {
  */
 const isUndefined = function (data) {
     return getType(data) === ObjectTypes.undefined;
-}
+};
 
 /**
  *
@@ -116,7 +116,7 @@ const isUndefined = function (data) {
  */
 const isNull = function (data) {
     return getType(data) === ObjectTypes.null;
-}
+};
 
 /**
  *
@@ -125,7 +125,7 @@ const isNull = function (data) {
  */
 const isSymbol = function (data) {
     return getType(data) === ObjectTypes.symbol;
-}
+};
 
 /**
  *
@@ -134,7 +134,7 @@ const isSymbol = function (data) {
  */
 const isObject = function (data) {
     return getType(data) === ObjectTypes.object;
-}
+};
 
 /**
  *
@@ -143,7 +143,7 @@ const isObject = function (data) {
  */
 const isFunction = function (data) {
     return getType(data) === ObjectTypes.function;
-}
+};
 
 /**
  * 判断给定的数据是否为引用类型
@@ -166,10 +166,9 @@ function isReferenceType(value) {
  * @param value
  * @return {boolean}
  */
-function isValueType(value){
+function isValueType(value) {
     return !isReferenceType(value);
 }
-
 
 module.exports = {
     ObjectTypes,

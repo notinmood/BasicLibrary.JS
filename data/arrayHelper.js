@@ -1,4 +1,4 @@
-const sh = require("./stringHelper");
+const sh = require('./stringHelper');
 
 /**
  * 特别说明：JavaScript下最好不要使用关联数组，如果有这种需求就使用对象{}形式。
@@ -9,8 +9,8 @@ const sh = require("./stringHelper");
  * @type {{hybrid: string, index: string, association: string, non: string}}
  */
 const ArrayTypes = {
-    "index": "index", "association": "association", "hybrid": "hybrid", "non": "non",
-}
+    index: 'index', association: 'association', hybrid: 'hybrid', non: 'non',
+};
 
 /**
  * 判断是否存在某个元素成员(判断Value)
@@ -156,25 +156,23 @@ function isEqual(arrayData1, arrayData2) {
      */
     if (arrayData1 === arrayData2) {
         return true;
-    } else {
-        if (arrayData1.length !== arrayData2.length) {
+    }
+    if (arrayData1.length !== arrayData2.length) {
+        return false;
+    }
+    for (const i in arrayData1) {
+        /**
+         * 只要出现一次不相等，那么2个数组就不相等
+         */
+        if (arrayData1[i] !== arrayData2[i]) {
             return false;
-        } else {
-            for (let i in arrayData1) {
-                /**
-                 * 只要出现一次不相等，那么2个数组就不相等
-                 */
-                if (arrayData1[i] !== arrayData2[i]) {
-                    return false;
-                }
-            }
-
-            /**
-             * for循环完成，没有出现不相等的情况，那么2个数组相等
-             */
-            return true;
         }
     }
+
+    /**
+     * for循环完成，没有出现不相等的情况，那么2个数组相等
+     */
+    return true;
 }
 
 /**
@@ -205,11 +203,11 @@ function getArrayType(arrayData) {
  * var arr = [{name: "zlw", age: "24"}, {name: "wlz", age: "5"}];
  * arrayHelper.sortObjectPropertyValue(arr,"age","DESC");
  */
-function sortByPropertyValue(arrayData, propName, sortOrder = "ASC") {
+function sortByPropertyValue(arrayData, propName, sortOrder = 'ASC') {
     return arrayData.sort(_sortByPropertyValue(propName, sortOrder));
 }
 
-function _sortByPropertyValue(propName, sortOrder = "ASC") {
+function _sortByPropertyValue(propName, sortOrder = 'ASC') {
     return function (obj1, obj2) {
         let val1 = obj1[propName];
         let val2 = obj2[propName];
@@ -219,7 +217,7 @@ function _sortByPropertyValue(propName, sortOrder = "ASC") {
         }
 
         return _sortTwoValue(val1, val2, sortOrder);
-    }
+    };
 }
 
 /**
@@ -229,20 +227,20 @@ function _sortByPropertyValue(propName, sortOrder = "ASC") {
  * var arr = [{name: "zlw", age: "24"}, {name: "wl", age: "5"}];
  * arrayHelper.sortObjectPropertyLength(arr,"name","DESC");
  */
-function sortByPropertyLength(arrayData, propName, sortOrder = "ASC") {
+function sortByPropertyLength(arrayData, propName, sortOrder = 'ASC') {
     return arrayData.sort(_sortByPropertyLength(propName, sortOrder));
 }
 
-function _sortByPropertyLength(propName, sortOrder = "ASC") {
+function _sortByPropertyLength(propName, sortOrder = 'ASC') {
     return function (obj1, obj2) {
-        let val1 = obj1[propName].toString().length;
-        let val2 = obj2[propName].toString().length;
+        const val1 = obj1[propName].toString().length;
+        const val2 = obj2[propName].toString().length;
 
         return _sortTwoValue(val1, val2, sortOrder);
-    }
+    };
 }
 
-function _sortTwoValue(val1, val2, sortOrder = "ASC") {
+function _sortTwoValue(val1, val2, sortOrder = 'ASC') {
     let result;
     if (val1 < val2) {
         result = -1;
@@ -253,7 +251,7 @@ function _sortTwoValue(val1, val2, sortOrder = "ASC") {
     }
 
     sortOrder = sortOrder.toLowerCase();
-    if (sortOrder === "desc") {
+    if (sortOrder === 'desc') {
         result = 0 - result;
     }
 
@@ -344,13 +342,13 @@ function mergeElementProperty(mainArray, ...otherArrays) {
 }
 
 function _mergeElementProperty(mainArray, secondaryArray) {
-    let mainCount = getCount(mainArray);
-    let secondaryCount = getCount(secondaryArray);
+    const mainCount = getCount(mainArray);
+    const secondaryCount = getCount(secondaryArray);
 
-    let result = [];
+    const result = [];
     for (let i = 0; i < mainCount; i++) {
         let item = null;
-        let index = i % secondaryCount;
+        const index = i % secondaryCount;
         item = Object.assign(mainArray[i], secondaryArray[index]);
         result.push(item);
     }
@@ -364,11 +362,11 @@ function _mergeElementProperty(mainArray, secondaryArray) {
  * @returns []
  */
 function concat(...arrays) {
-    let result = [];
+    const result = [];
     if (arrays.length > 0) {
         const arrayCount = arrays.length;
         for (let i = 0; i < arrayCount; i++) {
-            let currentArray = arrays[i];
+            const currentArray = arrays[i];
 
             for (const currentArrayKey in currentArray) {
                 if (currentArray.hasOwnProperty(currentArrayKey)) {
@@ -412,7 +410,7 @@ function explode(stringData, separator) {
  * @param {string} separator
  * @returns string
  */
-function implode(arrayData, separator = ",") {
+function implode(arrayData, separator = ',') {
     return sh.implode(arrayData, separator);
 }
 
@@ -478,4 +476,4 @@ module.exports = {
     removeHead,
     addTail,
     removeTail,
-}
+};

@@ -47,8 +47,17 @@ const currying = function (fn, ...args) {
     }
 }
 
+function AsyncCall(callback, timeout = 3000) {
+    setTimeout(() => {
+        if (typeof callback == 'function') {
+            callback();
+        }
+    }, timeout);
+}
+
 module.exports = {
     isFunction,
     getArgsCount,
     currying,
+    AsyncCall,
 };
