@@ -15,6 +15,19 @@ function getDate(dateString = "") {
     return date;
 }
 
+/**
+ * 获取指定天数后（前）的具体日期信息
+ * @param days 指定天数
+ * @param dateString 要转为日期格式的字符串
+ * @returns {Date}
+ */
+function getSpecialDate(days, dateString = "") {
+    let targetDate = getDate(dateString);
+    const milliseconds = 1000 * 60 * 60 * 24 * days;
+
+    return new Date(targetDate.getTime() + milliseconds)
+}
+
 
 /**
  * 根据指定字符串格式，格式日期显示
@@ -82,11 +95,7 @@ function isSameWeek(timeStampA, timeStampB) {
     let oneDayTime = 1000 * 60 * 60 * 24;
     let old_count = parseInt(A / oneDayTime);
     let now_other = parseInt(B / oneDayTime);
-    if (parseInt((old_count + 4) / 7) == parseInt((now_other + 4) / 7)) {
-        return true;
-    } else {
-        return false;
-    }
+    return parseInt((old_count + 4) / 7) == parseInt((now_other + 4) / 7);
 }
 
 module.exports = {
@@ -94,4 +103,5 @@ module.exports = {
     format,
     isSameDay,
     isSameWeek,
+    getSpecialDate,
 };
