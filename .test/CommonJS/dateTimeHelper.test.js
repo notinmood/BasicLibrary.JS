@@ -4,7 +4,7 @@ const expect = require('chai').expect;
 describe("单元测试包名称 日期时间测试包", function () {
     it("单元测试方法名称 获取具体日期", function () {
         let expectData = new Date("2022-12-6 0:0:1");
-        let actualData = helper.getSpecialDate(1,"2022-12-5 0:0:1");
+        let actualData = helper.getSpecialDate(1, "2022-12-5 0:0:1");
         expect(actualData.toLocaleString()).equals(expectData.toLocaleString());
     });
 

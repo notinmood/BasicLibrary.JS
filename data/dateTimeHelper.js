@@ -77,6 +77,11 @@ function format(date = null, formatter = "") {
     return formatter;
 }
 
+/**
+ * 判断给定的两个时间戳是否在同一天
+ * @param timeStampA
+ * @param timeStampB
+ */
 function isSameDay(timeStampA, timeStampB) {
     let dateA = new Date(timeStampA);
     let dateB = new Date(timeStampB);
@@ -84,7 +89,8 @@ function isSameDay(timeStampA, timeStampB) {
 }
 
 /**
- * 计算出 现在距离1970年1月1日的总天数，因为1970年1月1 是周4
+ * 判断该给定的两个时间戳是否在同一个星期
+ * 思路：计算出 现在距离1970年1月1日的总天数，因为1970年1月1 是周4
  * 所以（总天数+4）/7 取整 就是周数  如果相同就是同一周反之就不是。
  * @param {*} timeStampA
  * @param {*} timeStampB
